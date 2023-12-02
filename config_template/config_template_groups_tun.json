@@ -8,7 +8,7 @@
       {
         "tag": "proxyDns",
         "address": "8.8.8.8",
-        "detour": "SB-VIEFAST 🐲🦞🦑🦜"
+        "detour": "SB-VIEFAST 🐲🦞"
       },
       {
         "tag": "localDns",
@@ -71,7 +71,7 @@
   ],
   "outbounds": [
     {
-      "tag":"SB-VIEFAST 🐲🦞🦑🦜",
+      "tag":"SB-VIEFAST 🐲🦞",
       "type":"selector",
       "outbounds":[
         "🇻🇳 VIỆT NAM auto",
@@ -85,6 +85,7 @@
       "tag":"🇻🇳 VIỆT NAM auto",
       "type":"urltest",
       "outbounds":[
+        "direct",
         "{all}"
       ],
       "filter":[
@@ -98,6 +99,7 @@
       "tag":"🇭🇰 HONGKONG auto",
       "type":"urltest",
       "outbounds":[
+        "direct",
         "{all}"
       ],
       "filter":[
@@ -111,6 +113,7 @@
       "tag":"🇸🇬 SINGAPORE auto",
       "type":"urltest",
       "outbounds":[
+        "direct",
         "{all}"
       ],
       "filter":[
@@ -124,6 +127,7 @@
       "tag":"🚀 THẬP CẨM auto",
       "type":"urltest",
       "outbounds":[
+        "direct",
         "{all}"
       ],
       "filter":[
@@ -149,7 +153,7 @@
   "route": {
     "auto_detect_interface": true,
     "override_android_vpn": false,
-    "final": "SB-VIEFAST 🐲🦞🦑🦜",
+    "final": "SB-VIEFAST 🐲🦞",
     "rules": [
       {
         "protocol": "dns",
