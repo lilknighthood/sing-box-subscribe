@@ -11,8 +11,7 @@ body {
 }
 
 .header{
-    background: Gray;
-    color: DodgerBlue;
+    color: MediumSeaGreen;
     padding: 0.3em 1em;
     text-align: center;
     border: 1px dashed DodgerBlue;
