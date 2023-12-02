@@ -82,152 +82,37 @@
             "tag": "proxy",
             "type": "selector",
             "outbounds": [
-                "auto",
-                "direct",
+                "🇻🇳 VIỆT NAM auto",
+                "🇭🇰 HONGKONG auto",
                 "{all}"
             ]
         },
         {
-            "tag": "🤖 OpenAI",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
+            "tag":"🇻🇳 VIỆT NAM auto",
+            "type":"urltest",
+            "outbounds":[
+              "{all}"
             ],
-            "filter": [
-                {
-                    "action": "exclude",
-                    "keywords": [
-                        "🇭🇰|HK|hk|香港|港"
-                    ]
-                }
-            ]
-        },
-        {
-            "tag": "🌌 Google",
-            "type": "selector",
-            "outbounds": [
-                "{all}"
-            ]
-        },
-        {
-            "tag": "📟 Telegram",
-            "type": "selector",
-            "outbounds": [
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🐦 Twitter",
-            "type": "selector",
-            "outbounds": [
-                "{all}"
-            ]
-        },
-        {
-            "tag": "👤 Facebook",
-            "type": "selector",
-            "outbounds": [
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🛍️ Amazon",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🍎 Apple",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🧩 Microsoft",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🎮 Game",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
-            ]
-        },
-        {
-            "tag": "📺 Bilibili",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "include",
-                    "keywords": [
-                        "🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"
-                    ]
-                }
-            ]
-        },
-        {
-            "tag": "🎬 MediaVideo",
-            "type": "selector",
-            "outbounds": [
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🌏 !cn",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🌏 cn",
-            "type": "selector",
-            "outbounds": [
-                "direct",
-                "proxy"
-            ]
-        },
-        {
-            "tag": "🛑 AdBlock",
-            "type": "selector",
-            "outbounds": [
-                "block",
-                "direct"
-            ]
-        },
-        {
-            "tag": "auto",
-            "type": "urltest",
-            "outbounds": [
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "exclude",
-                    "keywords": [
-                        "网站|剩余|流量|过期|时间|期|地址"
-                    ]
-                }
+            "filter":[
+              {"action":"include","keywords":["🇻🇳|VN"]}
             ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
             "tolerance": 50
-        },
+          },
+          {
+            "tag":"🇭🇰 HONGKONG auto",
+            "type":"urltest",
+            "outbounds":[
+              "{all}"
+            ],
+            "filter":[
+              {"action":"include","keywords":["🇭🇰|HK"]}
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+          },
         {
             "type": "direct",
             "tag": "direct"
