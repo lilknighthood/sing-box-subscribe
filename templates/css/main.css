@@ -14,7 +14,8 @@ body {
     background: #000;
     color: #fff;
     padding: 0.3em 1em;
-margin: center;
+text-align: center;
+border: 3px solid green;
 }
 .content,
 .sidebar{
