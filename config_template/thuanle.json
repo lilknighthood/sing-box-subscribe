@@ -79,7 +79,7 @@
     ],
     "outbounds": [
         {
-            "tag": "SB-VIEFAST 🐲🦞🦑🦜",
+            "tag": "select",
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
@@ -95,6 +95,14 @@
             "outbounds": [
                 "{all}"
             ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇻🇳|VN"
+                    ]
+                }
+            ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
             "tolerance": 50
@@ -104,6 +112,14 @@
             "type": "urltest",
             "outbounds": [
                 "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇭🇰|HK"
+                    ]
+                }
             ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
@@ -115,6 +131,14 @@
             "outbounds": [
                 "{all}"
             ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇸🇬|SG"
+                    ]
+                }
+            ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
             "tolerance": 50
@@ -124,6 +148,14 @@
             "type": "urltest",
             "outbounds": [
                 "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "exclude",
+                    "keywords": [
+                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
+                    ]
+                }
             ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
