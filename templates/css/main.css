@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    font-weight: 300;
+    margin: 0
+}
+
+.container{
+    padding: 0.3em 1em;
+
+}
+
+.header{
+    background: #333;
+    color: #fff;
+    padding: 0.3em 1em;
+}
+.content,
+.sidebar{
+    box-sizing: border-box;
+}
+.main{
+    padding: 0.3em 1em;
+    
+}
+.content{
+    background: #e8e8e8;
+    padding: 0.3em 1em;
+    margin-bottom: 1em;
+}
+.sidebar{
+    background: #c3c3c3;
+    font-size:95%;
+    padding:0.3em 1em;
+}
+
+
+/* Respoinsive
+*
+*
+*
+*
+/* Tablet*/
+@media screen and(min-width:600px) {
+    .main:before, .main:after{
+         content: "";
+         display: table;
+         clear: both;
+    }
+    .main{
+        max-width: 100%;
+    }
+    .content{
+        width: 63.5%;
+        float: left;
+        margin-right: 1.5%;
+    }
+    .sidebar{
+        width: 35%;
+        float: left;
+    }
+} /* end tablet*/
+
+/* desktop*/
+@media screen and(min-width:1200px) {
+    .container{
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+}

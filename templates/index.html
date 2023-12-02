@@ -1,110 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="https://raw.githubusercontent.com/Toperlock/sing-box-subscribe/main/public/favicon.ico" type="image/x-icon">
-    <title>生成sing-box配置</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column; /* 垂直排列 */
-            align-items: center; /* 水平居中对齐 */
-            max-width: 100%; /* 调整内容最大宽度 */
-            /* transform: scale(1.9);  将内容放大190% */
-            justify-content: center;
-            height: 100vh; /* 使内容在垂直方向上居中 */
-            margin: 0; /* 去掉默认的页面边距 */
-            font-family: Arial, sans-serif; /* 可选的字体 */
-            background-color: #f2f2f2;
-        }
-        .container {
-            display: flex;
-            flex-direction: row; /* 水平排列 */
-            align-items: center; /* 水平居中对齐 */
-        }
-        /*
-        .left-box {
-            flex: 1;
-            padding: 10px;
-        }
-        */
-        .right-box {
-            flex: 2;
-            padding: 20px;
-            max-width: 100%; /* 设置最大宽度为100% */
-            box-sizing: border-box; /* 让padding不影响最大宽度 */
-        }
-        /* 媒体查询：屏幕宽度小于768px时应用下面的样式 */
-        @media screen and (max-width: 768px) {
-            .container {
-                flex-direction: column; /* 垂直排列 */
-            }
-            .right-box {
-                width: 100%; /* 平分屏幕宽度 */
-            }
-            .config-content {
-                white-space: normal; /* 在小屏幕下允许内容换行 */
-                margin-left: 20px; /* 与左边隔开20px，根据需要调整距离 */
-                margin-right: 20px; /* 与右边隔开20px，根据需要调整距离 */
-            }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="icon" href="https://raw.githubusercontent.com/Toperlock/sing-box-subscribe/main/public/favicon.ico"
+        type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/templates/css/main.css">
+    <title>SING-BOX</title>
 </head>
+
 <body>
-    <div class="container">
-        <!--
-        <div class="left-box">
+    <section id="canvas-show" class="canvas-wrap">
+        <div id="canvas" class="gradient"></div>
+    </section>
+    <div id="app"></div>
+    <script src="/templates/js/jquery.min.js"></script>
+    <!-- <script src="/js/three.min.js"></script> -->
+    <script src="/templates/js/projector.js"></script>
+    <script src="/templates/js/canvas-renderer.js"></script>
+    <script src="/templates/js/projector.js"></script>
+    <script src="/templates/js/3d-lines-animation.js"></script>
+    <div id="container">
+        <!-- <div class="left-box">
             <h1>Providers JSON 模板</h1>
             <form id="providers-form" method="POST" action="/update_providers">
                 <textarea name="providers_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ providers_data | safe }}</textarea>
                 <br>
             </form>
-        </div>
-        -->
-        <div class="right-box">
-            <h1>Edit TEMP_JSON_DATA</h1>
-            <form id="temp-json-form" method="POST" action="/edit_temp_json">
-                <textarea name="temp_json_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ temp_json_data | default('') }}</textarea>
-                <br>
-                <input type="submit" value="save">
-            </form>
-            <button onclick="toggleLanguage()">Switch Language</button>
-            <div class="form-container" style="display: flex; align-items: center;">
-                <form method="POST" action="/generate_config" style="display: flex; align-items: center;">
-                    <select name="template_index">
+        </div> -->
+
+        <div class="content">
+            <div class="header">
+                <h1>SING-BOX VIEFAST</h1>
+            </div>
+            <div class="main">
+                <form id="temp-json-form" method="POST" action="/edit_temp_json">
+                    <textarea name="temp_json_data" rows="10" cols="40"
+                        style="width: 100%; height: 400px;">{{ temp_json_data | default('') }}</textarea>
+                    <br>
+                    <input type="submit" class="btn btn-dark" value="save">
+                </form>
+
+                <!-- <button onclick="toggleLanguage()">Switch Language</button> -->
+                <!-- <div class="sidebar"> -->
+                <form method="POST" action="/generate_config">
+                    <select class="form-select form-select-lg mb-3" name="template_index">
                         {% for option in template_options %}
                         <option value="{{ loop.index - 1 }}">{{ option }}</option>
                         {% endfor %}
                     </select>
-                    <input type="submit" value="Select and Generate">
+                    <input type="submit" class="btn btn-dark" value="Select and Generate">
                 </form>
             </div>
+            <!-- </div> -->
         </div>
         <div class="config-content">
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe#%E9%A1%B5%E9%9D%A2%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4" target="_blank" rel="noopener noreferrer">请务必：点击查看操作说明</a></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe/tree/main/instructions#steps-for-page-manipulation" target="_blank" rel="noopener noreferrer">Please be sure to: Click to view operation instructions.</a></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe#providersjson%E6%96%87%E4%BB%B6" target="_blank" rel="noopener noreferrer">请务必：点击查看参数含义</a></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe/tree/main/instructions#providersjson-file" target="_blank" rel="noopener noreferrer">Please be sure to: Click to view parameter meanings.</a></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="3"><span style="font-weight: bold; color: black; margin: 5px 0; font-size: 14px;">填写订阅地址在引号 “” 内，注意订阅地址末尾不要有换行，这很容易被忽视！！！</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="4" data-color="red"><span style="font-weight: bold; color: red; margin: 5px 0; font-size: 14px;">提醒: 点击保存后请立即生成配置文件！！！</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="5"><span style="font-weight: bold; color: black; margin: 5px 0; font-size: 14px;">不然别人也会看到你保存的 TEMP_JSON_DATA 内容</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="6" data-color="red"><span style="font-weight: bold; color: red; margin: 5px 0; font-size: 14px;">“订阅地址”是以 "http://" 开头的【包含】节点信息的v2/clash链接或者是以 "vmess://","hysteria2://"... 之类开头的单条URI节点链接</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="7"><span style="font-weight: bold; color: black; margin: 5px 0; font-size: 14px;">机场提供的订阅链接能直接在浏览器打开，这脚本就能使用。请你自行检查是否可以</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="8" data-color="red"><span style="font-weight: bold; color: red; margin: 5px 0; font-size: 14px;">需要特殊环境才能打开的订阅链接，请你在 TEMP_JSON_DATA 修改 "User-Agent" 或者先行把机场订阅链接内容复制到gist里，脚本才会解析成功。或者本地运行脚本</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="9"><span style="font-weight: bold; color: black; margin: 5px 0; font-size: 14px;">因为服务器vercel获取链接内容不稳定，失败请重新再试一次。或者本地运行脚本</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="10" data-color="red"><span style="font-weight: bold; color: red; margin: 5px 0; font-size: 14px;">机场订阅里有hy2新协议，请修改 "User-Agent" 为：clashmeta</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="11"><span style="font-weight: bold; color: black; margin: 5px 0; font-size: 14px;">以上不是废话，没成功生成配置请你仔细阅读以上内容</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="12" data-color="red"><span style="font-weight: bold; color: red; margin: 5px 0; font-size: 14px;">因为没用数据库，不会返回配置文件链接。生成配置内容后复制到gist里当作 sing-box remote 链接</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;" data-translate="13"><span style="font-weight: bold; color: black; margin: 5px 0; font-size: 14px;">生成配置成功后请不要用第三方输入法复制内容，会有长度限制复制不全</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><span style="font-weight: bold; color: red; margin: 5px 0; font-size: 14px;">Một số Link Tiếng Việt không hoạt động với script này, vui lòng chạy nó trên local</span></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe/blob/main/instructions/README.md#-demonstration-video" target="_blank" rel="noopener noreferrer">Video hoạt động</a></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe/issues" target="_blank" rel="noopener noreferrer">遇到问题请开issue</a></h3>
-            <h3 style="margin: 8px 0; font-size: 14px;"><a href="https://github.com/Toperlock/sing-box-subscribe/issues" target="_blank" rel="noopener noreferrer">Please open an issue on github if you encounter problems.</a></h3>
             <pre id="config-text"></pre>
         </div>
     </div>
     <script>
-        const initialTempJsonData = '{"subscribes":[{"url":"URL LINK","tag":"tag_1","enabled":true,"emoji":1,"prefix":"","User-Agent":"v2rayng"},{"url":"URL LINK","tag":"tag_2","enabled":false,"emoji":0,"prefix":"❤️","User-Agent":"clashmeta"}],"auto_set_outbounds_dns":{"proxy":"","direct":""},"save_config_path":"./config.json","auto_backup":false,"exclude_protocol":"ssr","config_template":"","Only-nodes":false}';
+        const initialTempJsonData = '{"subscribes":[{"url":"URLLINK","tag":"tag_1","enabled":true,"emoji":1,"prefix":"","User-Agent":"v2rayng"}],"auto_set_outbounds_dns":{"proxy":"","direct":""},"save_config_path":"./config.json","auto_backup":false,"exclude_protocol":"ssr","config_template":"","Only-nodes":false}';
         let tempJsonData = initialTempJsonData;
         document.querySelector('#temp-json-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -167,7 +125,7 @@
                     if (element.tagName === 'A') {
                         element.href = originalLink;
                     } else {
-                    // 如果需要，可以添加其他语言的支持
+                        // 如果需要，可以添加其他语言的支持
                         window.location.reload();
                     }
                 }
@@ -175,13 +133,14 @@
         }
     </script>
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flashes">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% endwith %}
 </body>
+
 </html>
