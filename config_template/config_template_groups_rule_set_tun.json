@@ -12,9 +12,9 @@
       "secret": "",
       "default_mode": "rule"
     },
-  "cache_file": {
-    "enabled": true,
-    "store_fakeip": false
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": false
     }
   },
   "dns": {
@@ -59,7 +59,7 @@
       {
         "rule_set": "geosite-cn",
         "server": "localDns"
-      },   
+      },
       {
         "clash_mode": "direct",
         "server": "localDns"
@@ -116,135 +116,150 @@
   ],
   "outbounds": [
     {
-      "tag":"proxy",
-      "type":"selector",
-      "outbounds":[
+      "tag": "proxy",
+      "type": "selector",
+      "outbounds": [
         "auto",
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"🤖 OpenAI",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🤖 OpenAI",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ],
-      "filter":[
-        {"action":"exclude","keywords":["🇭🇰|HK|hk|香港|港"]}
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "🇭🇰|HK|hk|香港|港"
+          ]
+        }
       ]
     },
     {
-      "tag":"🌌 Google",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🌌 Google",
+      "type": "selector",
+      "outbounds": [
         "{all}"
       ]
     },
     {
-      "tag":"📟 Telegram",
-      "type":"selector",
-      "outbounds":[
+      "tag": "📟 Telegram",
+      "type": "selector",
+      "outbounds": [
         "{all}"
       ]
     },
     {
-      "tag":"🐦 Twitter",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🐦 Twitter",
+      "type": "selector",
+      "outbounds": [
         "{all}"
       ]
     },
     {
-      "tag":"👤 Facebook",
-      "type":"selector",
-      "outbounds":[
+      "tag": "👤 Facebook",
+      "type": "selector",
+      "outbounds": [
         "{all}"
       ]
     },
     {
-      "tag":"🛍️ Amazon",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🛍️ Amazon",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"🍎 Apple",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🍎 Apple",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"🧩 Microsoft",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🧩 Microsoft",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"🎮 Game",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🎮 Game",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"📺 Bilibili",
-      "type":"selector",
-      "outbounds":[
+      "tag": "📺 Bilibili",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ],
-      "filter":[
-        {"action":"include","keywords":["🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"]}
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"
+          ]
+        }
       ]
     },
     {
-      "tag":"🎬 MediaVideo",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🎬 MediaVideo",
+      "type": "selector",
+      "outbounds": [
         "{all}"
       ]
     },
     {
-      "tag":"🌏 !cn",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🌏 !cn",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"🌏 cn",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🌏 cn",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "proxy"
       ]
     },
     {
-      "tag":"🛑 AdBlock",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🛑 AdBlock",
+      "type": "selector",
+      "outbounds": [
         "block",
         "direct"
       ]
     },
     {
-      "tag":"auto",
-      "type":"urltest",
-      "outbounds":[
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [
         "{all}"
       ],
-      "filter":[
-        {"action":"exclude","keywords":["网站|剩余|流量|过期|时间|期|地址"]}
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "网站|剩余|流量|过期|时间|期|地址"
+          ]
+        }
       ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -310,7 +325,10 @@
         "outbound": "🌌 Google"
       },
       {
-        "rule_set": ["geosite-google","geosite-github"],
+        "rule_set": [
+          "geosite-google",
+          "geosite-github"
+        ],
         "outbound": "🌌 Google"
       },
       {
@@ -322,7 +340,7 @@
         "outbound": "📟 Telegram"
       },
       {
-        "rule_set":"geoip-twitter",
+        "rule_set": "geoip-twitter",
         "outbound": "🐦 Twitter"
       },
       {
@@ -334,7 +352,10 @@
         "outbound": "👤 Facebook"
       },
       {
-        "rule_set":["geosite-facebook","geosite-instagram"],
+        "rule_set": [
+          "geosite-facebook",
+          "geosite-instagram"
+        ],
         "outbound": "👤 Facebook"
       },
       {
@@ -362,7 +383,13 @@
         "outbound": "🎬 MediaVideo"
       },
       {
-        "rule_set": ["geosite-tiktok","geosite-netflix","geosite-hbo","geosite-disney","geosite-primevideo"],
+        "rule_set": [
+          "geosite-tiktok",
+          "geosite-netflix",
+          "geosite-hbo",
+          "geosite-disney",
+          "geosite-primevideo"
+        ],
         "outbound": "🎬 MediaVideo"
       },
       {

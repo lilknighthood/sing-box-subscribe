@@ -8,21 +8,16 @@
       {
         "tag": "proxyDns",
         "address": "8.8.8.8",
-        "detour": "SB-VIEFAST🦑🦜"
+        "detour": "SB-VIEFAST 🚀"
       },
       {
         "tag": "localDns",
         "address": "local",
-        "strategy": "ipv4_only",
         "detour": "direct"
       },
       {
         "tag": "block",
         "address": "rcode://success"
-      },
-      {
-        "tag": "remote",
-        "address": "fakeip"
       }
     ],
     "rules": [
@@ -40,11 +35,6 @@
         "server": "remote"
       }
     ],
-    "fakeip": {
-      "enabled": true,
-      "inet4_range": "198.18.0.0/15",
-      "inet6_range": "fc00::/18"
-    },
     "independent_cache": true,
     "strategy": "ipv4_only"
   },
@@ -71,7 +61,7 @@
   ],
   "outbounds": [
     {
-      "tag":"SB-VIEFAST🦑🦜",
+      "tag":"SB-VIEFAST 🚀",
       "type":"selector",
       "outbounds":[
         "🇻🇳 VIỆT NAM auto",
@@ -149,7 +139,7 @@
   "route": {
     "auto_detect_interface": true,
     "override_android_vpn": false,
-    "final": "SB-VIEFAST🦑🦜",
+    "final": "SB-VIEFAST 🚀",
     "rules": [
       {
         "protocol": "dns",
@@ -187,7 +177,15 @@
   },
   "experimental": {
     "clash_api": {
-      "external_controller": "127.0.0.1:9090"
+      "external_controller": "127.0.0.1:9090",
+      "external_ui_download_url": "",
+      "external_ui_download_detour": "",
+      "external_ui": "ui",
+      "secret": "",
+      "default_mode": "rule",
+      "store_selected": true,
+      "cache_file": "",
+      "cache_id": ""
     }
-}
+  }
 }

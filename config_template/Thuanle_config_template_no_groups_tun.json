@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": "info",
+    "level": "debug",
     "timestamp": true
   },
   "dns": {
@@ -8,12 +8,11 @@
       {
         "tag": "proxyDns",
         "address": "8.8.8.8",
-        "detour": "SB-VIEFAST🦑🦜"
+        "detour": "proxy"
       },
       {
         "tag": "localDns",
-        "address": "local",
-        "strategy": "ipv4_only",
+        "address": "https://223.5.5.5/dns-query",
         "detour": "direct"
       },
       {
@@ -27,9 +26,37 @@
     ],
     "rules": [
       {
+        "domain": [
+          "ghproxy.com",
+          "cdn.jsdelivr.net",
+          "testingcf.jsdelivr.net"
+        ],
+        "server": "localDns"
+      },
+      {
+        "geosite": "category-ads-all",
+        "server": "block"
+      },
+      {
         "outbound": "any",
         "server": "localDns",
         "disable_cache": true
+      },
+      {
+        "geosite": "cn",
+        "server": "localDns"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "localDns"
+      },
+      {
+        "clash_mode": "global",
+        "server": "proxyDns"
+      },
+      {
+        "geosite": "geolocation-!cn",
+        "server": "proxyDns"
       },
       {
         "query_type": [
@@ -50,114 +77,56 @@
   "inbounds": [
     {
       "type": "tun",
-      "tag": "tun-in",
-      "interface_name": "tun0",
       "inet4_address": "172.19.0.1/30",
       "mtu": 9000,
       "auto_route": true,
       "strict_route": true,
-      "stack": "system",
+      "sniff": true,
       "endpoint_independent_nat": false,
-      "sniff": false
+      "stack": "system",
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 2080
+        }
+      }
     },
     {
-      "listen": "0.0.0.0",
+      "type": "mixed",
+      "listen": "127.0.0.1",
       "listen_port": 2080,
-      "sniff": false,
-      "tag": "mixed-in",
-      "type": "mixed"
+      "sniff": true,
+      "users": []
     }
   ],
   "outbounds": [
     {
-      "tag": "SB-VIEFAST🦑🦜",
+      "tag": "proxy",
       "type": "selector",
       "outbounds": [
-        "🇻🇳 VIỆT NAM auto",
-        "🇭🇰 HONGKONG auto",
-        "🇸🇬 SINGAPORE auto",
-        "🚀 THẬP CẨM auto",
+        "auto",
+        "direct",
         "{all}"
       ]
     },
     {
-      "tag": "🇻🇳 VIỆT NAM auto",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇻🇳|VN"
-          ]
-        }
-      ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "🇭🇰 HONGKONG auto",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇭🇰|HK"
-          ]
-        }
-      ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "🇸🇬 SINGAPORE auto",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇸🇬|SG"
-          ]
-        }
-      ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "🚀 THẬP CẨM auto",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "exclude",
-          "keywords": [
-            "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
-          ]
-        }
-      ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "🌌 Google",
+      "tag": "🌏 !cn",
       "type": "selector",
       "outbounds": [
+        "direct",
         "{all}"
       ]
+    },
+    {
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
     },
     {
       "type": "direct",
@@ -174,32 +143,16 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "override_android_vpn": false,
+    "final": "proxy",
     "geoip": {
-      "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
-      "download_detour": "SB-VIEFAST🦑🦜"
+      "download_url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.db",
+      "download_detour": "direct"
     },
     "geosite": {
-      "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
-      "download_detour": "SB-VIEFAST🦑🦜"
+      "download_url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.db",
+      "download_detour": "direct"
     },
-    "final": "SB-VIEFAST🦑🦜",
     "rules": [
-      {
-        "rule_set": "geosite-youtube",
-        "outbound": "🌌 Google"
-      },
-      {
-        "rule_set": "geoip-gg",
-        "outbound": "🌌 Google"
-      },
-      {
-        "rule_set": [
-          "geosite-google",
-          "geosite-github"
-        ],
-        "outbound": "🌌 Google"
-      },
       {
         "protocol": "dns",
         "outbound": "dns-out"
@@ -210,217 +163,54 @@
         "outbound": "block"
       },
       {
-        "inbound": [
-          "dns-in"
+        "geosite": "category-ads-all",
+        "outbound": "block"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "proxy"
+      },
+      {
+        "domain": [
+          "clash.razord.top",
+          "yacd.metacubex.one",
+          "yacd.haishan.me",
+          "d.metacubex.one"
         ],
-        "outbound": "dns-out"
+        "outbound": "direct"
       },
       {
-        "outbound": "dns-out",
-        "port": [
-          53
-        ]
+        "geosite": "geolocation-!cn",
+        "outbound": "🌏 !cn"
       },
       {
-        "ip_cidr": [
-          "224.0.0.0/3",
-          "ff00::/8"
+        "geoip": [
+          "private",
+          "cn"
         ],
-        "outbound": "block",
-        "source_ip_cidr": [
-          "224.0.0.0/3",
-          "ff00::/8"
-        ]
-      }
-    ],
-    "rule_set": [
-      {
-        "tag": "geoip-gg",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-gg.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
+        "outbound": "direct"
       },
       {
-        "tag": "geoip-tg",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-tg.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geoip-tw",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-tw.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geoip-fk",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-fk.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geoip-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-openai",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-openai.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-youtube",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-google",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-github",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-telegram",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-twitter",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-facebook",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-facebook.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-instagram",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-instagram.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-amazon",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-amazon.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-apple",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-apple.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-microsoft",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-microsoft.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-category-games",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-games.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-bilibili",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bilibili.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-tiktok",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tiktok.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-netflix",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-netflix.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-hbo",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-hbo.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-disney",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-disney.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-primevideo",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-primevideo.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-geolocation-!cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
-      },
-      {
-        "tag": "geosite-category-ads-all",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-        "download_detour": "SB-VIEFAST🦑🦜"
+        "geosite": "cn",
+        "outbound": "direct"
       }
     ]
   },
   "experimental": {
     "clash_api": {
-      "external_controller": "127.0.0.1:9090"
+      "external_controller": "127.0.0.1:9090",
+      "external_ui_download_url": "",
+      "external_ui_download_detour": "",
+      "external_ui": "ui",
+      "secret": "",
+      "default_mode": "rule",
+      "store_selected": true,
+      "cache_file": "",
+      "cache_id": ""
     }
   }
 }
