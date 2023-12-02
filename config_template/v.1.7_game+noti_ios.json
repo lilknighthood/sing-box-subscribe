@@ -159,6 +159,7 @@
             "type": "selector",
             "tag": "WhatsApp",
             "outbounds": [
+                "direct",
                 "Game_Noti_ios📱🍎",
                 "Best Latency"
             ]
@@ -167,6 +168,7 @@
             "type": "selector",
             "tag": "GAMESMAX(ML/FF/AOV)",
             "outbounds": [
+                "direct",
                 "Game_Noti_ios📱🍎",
                 "Best Latency"
             ]
@@ -175,6 +177,7 @@
             "type": "selector",
             "tag": "Route Port Game",
             "outbounds": [
+                "direct",
                 "Game_Noti_ios📱🍎",
                 "Best Latency"
             ]
