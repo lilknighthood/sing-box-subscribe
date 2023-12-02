@@ -158,7 +158,6 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "override_android_vpn": true,
     "final": "SB-VIEFAST 🚀",
     "rules": [
       {
@@ -175,12 +174,6 @@
           "dns-in"
         ],
         "outbound": "dns-out"
-      },
-      {
-        "outbound": "dns-out",
-        "port": [
-          53
-        ]
       },
       {
         "ip_cidr": [
