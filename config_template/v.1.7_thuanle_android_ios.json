@@ -18,7 +18,7 @@
                 "tag": "select-dns",
                 "address": "8.8.4.4",
                 "strategy": "ipv4_only",
-                "detour": "proxy"
+                "detour": "SB 🚀⚡"
             },
             {
                 "tag": "direct-dns",
@@ -47,7 +47,7 @@
                 "rewrite_ttl": 20
             },
             {
-                "outbound": "proxy",
+                "outbound": "SB 🚀⚡",
                 "server": "select-dns",
                 "rewrite_ttl": 20
             }
@@ -79,7 +79,7 @@
     ],
     "outbounds": [
         {
-            "tag": "proxy",
+            "tag": "SB 🚀⚡",
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
@@ -173,7 +173,7 @@
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "proxy",
+        "final": "SB 🚀⚡",
         "rules": [
             {
                 "network": "udp",
@@ -186,7 +186,7 @@
                 "domain_suffix": [
                     "googlesyndication.com"
                 ],
-                "outbound": "proxy"
+                "outbound": "SB 🚀⚡"
             },
             {
                 "inbound": [
