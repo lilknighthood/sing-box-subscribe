@@ -83,7 +83,6 @@
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
-                "🇸🇬 SINGAPORE auto",
                 "🇭🇰 HONGKONG auto",
                 "{all}"
             ]
@@ -114,21 +113,6 @@
                     "action": "include",
                     "keywords": [
                         "🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"
-                    ]
-                }
-            ]
-        },
-        {
-            "tag": "🇸🇬 SINGAPORE auto",
-            "type": "selector",
-            "outbounds": [
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "include",
-                    "keywords": [
-                        "🇸🇬|SG"
                     ]
                 }
             ]
