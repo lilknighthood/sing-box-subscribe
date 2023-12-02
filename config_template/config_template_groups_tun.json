@@ -26,7 +26,6 @@
       }
     ],
     "rules": [
-      
       {
         "outbound": "any",
         "server": "localDns",
@@ -71,9 +70,9 @@
   ],
   "outbounds": [
     {
-      "tag":"SB-VIEFAST 🚀",
-      "type":"selector",
-      "outbounds":[
+      "tag": "SB-VIEFAST 🚀",
+      "type": "selector",
+      "outbounds": [
         "🇻🇳 VIỆT NAM auto",
         "🇭🇰 HONGKONG auto",
         "🇸🇬 SINGAPORE auto",
@@ -82,52 +81,72 @@
       ]
     },
     {
-      "tag":"🇻🇳 VIỆT NAM auto",
-      "type":"urltest",
-      "outbounds":[
+      "tag": "🇻🇳 VIỆT NAM auto",
+      "type": "urltest",
+      "outbounds": [
         "{all}"
       ],
-      "filter":[
-        {"action":"include","keywords":["🇻🇳|VN"]}
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇻🇳|VN"
+          ]
+        }
       ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
     },
     {
-      "tag":"🇭🇰 HONGKONG auto",
-      "type":"urltest",
-      "outbounds":[
+      "tag": "🇭🇰 HONGKONG auto",
+      "type": "urltest",
+      "outbounds": [
         "{all}"
       ],
-      "filter":[
-        {"action":"include","keywords":["🇭🇰|HK"]}
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇭🇰|HK"
+          ]
+        }
       ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
     },
     {
-      "tag":"🇸🇬 SINGAPORE auto",
-      "type":"urltest",
-      "outbounds":[
+      "tag": "🇸🇬 SINGAPORE auto",
+      "type": "urltest",
+      "outbounds": [
         "{all}"
       ],
-      "filter":[
-        {"action":"include","keywords":["🇸🇬|SG"]}
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇸🇬|SG"
+          ]
+        }
       ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
     },
     {
-      "tag":"🚀 THẬP CẨM auto",
-      "type":"urltest",
-      "outbounds":[
+      "tag": "🚀 THẬP CẨM auto",
+      "type": "urltest",
+      "outbounds": [
         "{all}"
       ],
-      "filter":[
-        {"action":"exclude","keywords":["🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"]}
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
+          ]
+        }
       ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "1m",
@@ -189,5 +208,5 @@
     "clash_api": {
       "external_controller": "127.0.0.1:9090"
     }
-}
+  }
 }
