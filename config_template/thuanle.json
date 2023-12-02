@@ -83,7 +83,8 @@
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
-                "📺 Bilibili",
+                "🇸🇬 SINGAPORE auto",
+                "🇭🇰 HONGKONG auto",
                 "{all}"
             ]
         },
@@ -91,7 +92,6 @@
             "tag": "🇻🇳 VIỆT NAM auto",
             "type": "selector",
             "outbounds": [
-                "direct",
                 "{all}"
             ],
             "filter": [
@@ -104,10 +104,9 @@
             ]
         },
         {
-            "tag": "📺 Bilibili",
+            "tag": "🇭🇰 HONGKONG auto",
             "type": "selector",
             "outbounds": [
-                "direct",
                 "{all}"
             ],
             "filter": [
@@ -115,6 +114,21 @@
                     "action": "include",
                     "keywords": [
                         "🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "🇸🇬 SINGAPORE auto",
+            "type": "selector",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇸🇬|SG"
                     ]
                 }
             ]
