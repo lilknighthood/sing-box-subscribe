@@ -12,10 +12,10 @@ body {
 
 .header{
     background: Gray;
-    color: #fff;
+    color: DodgerBlue;
     padding: 0.3em 1em;
     text-align: center;
-    border: 3px dashed DodgerBlue;
+    border: 1px dashed DodgerBlue;
 }
 .content,
 .sidebar{
