@@ -27,7 +27,7 @@
         <!-- <div class="left-box">
             <h1>Providers JSON 模板</h1>
             <form id="providers-form" method="POST" action="/update_providers">
-                <textarea name="providers_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ providers_data | safe }}</textarea>
+                <textarea name="providers_data" rows="10" cols="40" style="width: 400px">{{ providers_data | safe }}</textarea>
                 <br>
             </form>
         </div> -->
@@ -38,8 +38,7 @@
             </div>
             <div class="main">
                 <form id="temp-json-form" method="POST" action="/edit_temp_json">
-                    <textarea name="temp_json_data" class="form-control" id="exampleFormControlTextarea1" rows="3" cols="40"
-                        style="width: 100%;">{{ temp_json_data | default('') }}</textarea>
+                    <textarea name="temp_json_data" class="form-control" id="exampleFormControlTextarea1" rows="3" cols="40"style="width: 100%;">{{ temp_json_data | default('') }}</textarea>
                     <br>
                     <input type="submit" class="btn btn-primary mb-3" value="save">
                 </form>
