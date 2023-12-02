@@ -84,6 +84,8 @@
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
                 "🇭🇰 HONGKONG auto",
+                "🇸🇬 SINGAPORE auto",
+                "🚀 THẬP CẨM auto",
                 "{all}"
             ]
         },
@@ -120,10 +122,36 @@
             ]
         },
         {
-            "tag": "auto",
+            "tag": "🇸🇬 SINGAPORE auto",
             "type": "urltest",
             "outbounds": [
                 "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇸🇬|SG"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "🚀 THẬP CẨM auto",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "exclude",
+                    "keywords": [
+                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
+                    ]
+                }
             ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
