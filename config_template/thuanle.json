@@ -84,6 +84,7 @@
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
                 "🇭🇰 HONGKONG auto",
+                "direct",
                 "{all}"
             ]
         },
