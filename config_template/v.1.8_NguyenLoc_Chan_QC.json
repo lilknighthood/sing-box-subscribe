@@ -9,7 +9,7 @@
         "tag": "proxy-dns",
         "address": "94.140.14.14",
         "strategy": "ipv4_only",
-        "detour": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈"
+        "detour": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝"
       },
       {
         "tag": "block-dns",
@@ -32,7 +32,7 @@
         "rewrite_ttl": 20
       },
       {
-        "outbound": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈",
+        "outbound": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
         "server": "proxy-dns",
         "rewrite_ttl": 20
       }
@@ -64,19 +64,19 @@
   ],
   "outbounds": [
     {
-      "tag": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈",
+      "tag": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
       "type": "selector",
       "outbounds": [
-        "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻",
-        "𝕳𝖔𝖓𝖌𝕶𝖔𝖓𝖌𝖁𝕴𝕻",
-        "𝕾𝖎𝖓𝖌𝖆𝖕𝖔𝖗𝖊𝖁𝕴𝕻",
-        "𝕵𝖆𝖕𝖆𝖓𝖁𝕴𝕻",
-        "𝕰𝖚𝖗𝖔𝖁𝕴𝕻",
+        "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
+        "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
+        "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
+        "ᴊᴀᴘᴀɴᴠɪᴘ",
+        "ᴇᴜʀᴏᴠɪᴘ",
         "{all}"
       ]
     },
     {
-      "tag": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻",
+      "tag": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
         "direct",
@@ -95,7 +95,7 @@
       "tolerance": 50
     },
     {
-      "tag": "𝕳𝖔𝖓𝖌𝕶𝖔𝖓𝖌𝖁𝕴𝕻",
+      "tag": "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
         "direct",
@@ -114,7 +114,7 @@
       "tolerance": 50
     },
     {
-      "tag": "𝕵𝖆𝖕𝖆𝖓𝖁𝕴𝕻",
+      "tag": "ᴊᴀᴘᴀɴᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
         "direct",
@@ -133,7 +133,7 @@
       "tolerance": 50
     },
     {
-      "tag": "𝕾𝖎𝖓𝖌𝖆𝖕𝖔𝖗𝖊𝖁𝕴𝕻",
+      "tag": "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
         "direct",
@@ -152,7 +152,7 @@
       "tolerance": 50
     },
     {
-      "tag": "𝕰𝖚𝖗𝖔𝖁𝕴𝕻",
+      "tag": "ᴇᴜʀᴏᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
         "direct",
@@ -188,17 +188,17 @@
     "override_android_vpn": true,
     "geoip": {
       "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
-      "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+      "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
     },
     "geosite": {
       "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
-      "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+      "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
     },
-    "final": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈",
+    "final": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
     "rules": [
       {
         "rule_set": "geosite-youtube",
-        "outbound": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+        "outbound": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
       },
       {
         "rule_set": [
@@ -251,14 +251,14 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
-        "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+        "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
       },
       {
         "tag": "geosite-google",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
-        "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+        "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
       }
     ]
   },
