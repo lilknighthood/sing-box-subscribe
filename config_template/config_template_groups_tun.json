@@ -66,36 +66,41 @@
   ],
   "outbounds": [
     {
-      "tag":"proxy",
-      "type":"selector",
-      "outbounds":[
+      "tag": "proxy",
+      "type": "selector",
+      "outbounds": [
         "auto",
         "direct",
         "{all}"
       ]
     },
     {
-      "tag":"🤖 OpenAI",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🤖 OpenAI",
+      "type": "selector",
+      "outbounds": [
         "direct",
         "{all}"
       ],
-      "filter":[
-        {"action":"exclude","keywords":["🇭🇰|HK|hk|香港|港"]}
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "🇭🇰|HK|hk|香港|港"
+          ]
+        }
       ]
     },
     {
-      "tag":"🌌 Google",
-      "type":"selector",
-      "outbounds":[
+      "tag": "🌌 Google",
+      "type": "selector",
+      "outbounds": [
         "{all}"
       ]
     },
     {
-      "tag":"auto",
-      "type":"urltest",
-      "outbounds":[
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [
         "{all}"
       ],
       "url": "http://www.gstatic.com/generate_204",
