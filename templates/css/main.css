@@ -36,7 +36,14 @@ body {
     padding:0.3em 1em;
 }
 
-
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: LightGray;
+  color: white;
+  text-align: center;
 /* Respoinsive
 *
 *
