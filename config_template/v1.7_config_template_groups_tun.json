@@ -19,10 +19,6 @@
       {
         "tag": "block",
         "address": "rcode://success"
-      },
-      {
-        "tag": "remote",
-        "address": "fakeip"
       }
     ],
     "rules": [
@@ -40,11 +36,6 @@
         "server": "remote"
       }
     ],
-    "fakeip": {
-      "enabled": true,
-      "inet4_range": "198.18.0.0/15",
-      "inet6_range": "fc00::/18"
-    },
     "independent_cache": true,
     "strategy": "ipv4_only"
   },
@@ -152,7 +143,7 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "override_android_vpn": false,
+    "override_android_vpn": true,
     "final": "SB-VIEFAST 🐲🦞",
     "rules": [
       {
