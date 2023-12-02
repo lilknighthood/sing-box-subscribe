@@ -82,13 +82,13 @@
             "tag": "proxy",
             "type": "selector",
             "outbounds": [
-                "🤖 OpenAI",
+                "🇻🇳 VIỆT NAM auto",
                 "📺 Bilibili",
                 "{all}"
             ]
         },
         {
-            "tag": "🤖 OpenAI",
+            "tag": "🇻🇳 VIỆT NAM auto",
             "type": "selector",
             "outbounds": [
                 "direct",
@@ -96,9 +96,9 @@
             ],
             "filter": [
                 {
-                    "action": "exclude",
+                    "action": "include",
                     "keywords": [
-                        "🇭🇰|HK|hk|香港|港"
+                        "🇻🇳|VN"
                     ]
                 }
             ]
