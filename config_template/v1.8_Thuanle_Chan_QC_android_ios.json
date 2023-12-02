@@ -9,7 +9,7 @@
         "tag": "proxy-dns",
         "address": "94.140.14.14",
         "strategy": "ipv4_only",
-        "detour": "THUANLE_PRO🌶"
+        "detour": "SB 🚀⚡"
       },
       {
         "tag": "block-dns",
@@ -32,7 +32,7 @@
         "rewrite_ttl": 20
       },
       {
-        "outbound": "THUANLE_PRO🌶",
+        "outbound": "SB 🚀⚡",
         "server": "proxy-dns",
         "rewrite_ttl": 20
       }
@@ -64,7 +64,7 @@
   ],
   "outbounds": [
     {
-      "tag": "THUANLE_PRO🌶",
+      "tag": "SB 🚀⚡",
       "type": "selector",
       "outbounds": [
         "🇻🇳 VIỆT NAM auto",
@@ -174,7 +174,7 @@
       "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
       "download_detour": "🇻🇳 VIỆT NAM auto"
     },
-    "final": "THUANLE_PRO🌶",
+    "final": "SB 🚀⚡",
     "rules": [
       {
         "rule_set": "geosite-youtube",
