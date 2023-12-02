@@ -11,7 +11,7 @@ body {
 }
 
 .header{
-    background: #333;
+    background: $gray-400;
     color: #fff;
     padding: 0.3em 1em;
 }
