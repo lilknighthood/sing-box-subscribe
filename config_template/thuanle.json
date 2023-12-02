@@ -82,38 +82,53 @@
             "tag": "proxy",
             "type": "selector",
             "outbounds": [
-                "🇻🇳 VIỆT NAM auto",
-                "🇭🇰 HONGKONG auto",
-                "direct",
+                "🤖 OpenAI",
+                "📺 Bilibili",
                 "{all}"
             ]
         },
         {
-            "tag":"🇻🇳 VIỆT NAM auto",
-            "type":"urltest",
-            "outbounds":[
-              "{all}"
+            "tag": "🤖 OpenAI",
+            "type": "selector",
+            "outbounds": [
+                "direct",
+                "{all}"
             ],
-            "filter":[
-              {"action":"include","keywords":["🇻🇳|VN"]}
+            "filter": [
+                {
+                    "action": "exclude",
+                    "keywords": [
+                        "🇭🇰|HK|hk|香港|港"
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "📺 Bilibili",
+            "type": "selector",
+            "outbounds": [
+                "direct",
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "auto",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
             ],
             "url": "http://www.gstatic.com/generate_204",
             "interval": "1m",
             "tolerance": 50
-          },
-          {
-            "tag":"🇭🇰 HONGKONG auto",
-            "type":"urltest",
-            "outbounds":[
-              "{all}"
-            ],
-            "filter":[
-              {"action":"include","keywords":["🇭🇰|HK"]}
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
-          },
+        },
         {
             "type": "direct",
             "tag": "direct"
