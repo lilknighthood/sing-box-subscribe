@@ -18,7 +18,7 @@
                 "tag": "select-dns",
                 "address": "8.8.4.4",
                 "strategy": "ipv4_only",
-                "detour": "select"
+                "detour": "proxy"
             },
             {
                 "tag": "direct-dns",
@@ -47,7 +47,7 @@
                 "rewrite_ttl": 20
             },
             {
-                "outbound": "select",
+                "outbound": "proxy",
                 "server": "select-dns",
                 "rewrite_ttl": 20
             }
@@ -173,7 +173,7 @@
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "select",
+        "final": "proxy",
         "rules": [
             {
                 "network": "udp",
@@ -186,7 +186,7 @@
                 "domain_suffix": [
                     "googlesyndication.com"
                 ],
-                "outbound": "select"
+                "outbound": "proxy"
             },
             {
                 "inbound": [
