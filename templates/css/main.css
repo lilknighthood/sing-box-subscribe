@@ -35,13 +35,6 @@ body {
     padding:0.3em 1em;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: DodgerBlue;
-  text-align: center;
 /* Respoinsive
 *
 *
@@ -77,7 +70,7 @@ body {
 }
 
 
-CSS.g-6,
+g-6,
 .gx-6 {
   --bs-gutter-x: 4.5rem;
 }
