@@ -91,7 +91,7 @@
       "outbounds":[
         "{all}"
       ]
-    }
+    },
     {
       "tag":"auto",
       "type":"urltest",
