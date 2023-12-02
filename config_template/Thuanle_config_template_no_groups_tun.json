@@ -1,0 +1,246 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "proxy-dns",
+        "address": "94.140.14.14",
+        "strategy": "ipv4_only",
+        "detour": "THUANLE_PRO🌶"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          ".arpa.",
+          ".arpa"
+        ],
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "THUANLE_PRO🌶",
+        "server": "proxy-dns",
+        "rewrite_ttl": 20
+      }
+    ],
+    "reverse_mapping": true,
+    "strategy": "ipv4_only",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "inet4_address": "172.19.0.1/30",
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "endpoint_independent_nat": false,
+      "sniff": false
+    },
+    {
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": false,
+      "tag": "mixed-in",
+      "type": "mixed"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "THUANLE_PRO🌶",
+      "type": "selector",
+      "outbounds": [
+        "🇻🇳 VIỆT NAM auto",
+        "🇭🇰 HONGKONG auto",
+        "🇸🇬 SINGAPORE auto",
+        "🚀 THẬP CẨM auto",
+        "{all}"
+      ]
+    },
+    {
+      "tag": "🇻🇳 VIỆT NAM auto",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇻🇳|VN"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "🇭🇰 HONGKONG auto",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇭🇰|HK"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "🇸🇬 SINGAPORE auto",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇸🇬|SG"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "🚀 THẬP CẨM auto",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "override_android_vpn": true,
+    "geoip": {
+      "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
+      "download_detour": "🇻🇳 VIỆT NAM auto"
+    },
+    "geosite": {
+      "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
+      "download_detour": "🇻🇳 VIỆT NAM auto"
+    },
+    "final": "THUANLE_PRO🌶",
+    "rules": [
+      {
+        "rule_set": "geosite-youtube",
+        "outbound": "🇻🇳 VIỆT NAM auto"
+      },
+      {
+        "rule_set": [
+          "geosite-google"
+        ],
+        "outbound": "block"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "outbound": "block"
+      },
+      {
+        "geosite": [
+          "google-ads"
+        ],
+        "outbound": "block"
+      },
+      {
+        "inbound": [
+          "dns-in"
+        ],
+        "outbound": "dns-out"
+      },
+      {
+        "outbound": "dns-out",
+        "port": [
+          53
+        ]
+      },
+      {
+        "ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ],
+        "outbound": "block",
+        "source_ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ]
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geosite-youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
+        "download_detour": "🇻🇳 VIỆT NAM auto"
+      },
+      {
+        "tag": "geosite-google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+        "download_detour": "🇻🇳 VIỆT NAM auto"
+      }
+    ]
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090"
+    }
+  }
+}
