@@ -41,7 +41,7 @@
                     <textarea name="temp_json_data" rows="10" cols="40"
                         style="width: 100%; height: 400px;">{{ temp_json_data | default('') }}</textarea>
                     <br>
-                    <input type="submit" class="btn btn-dark" value="save">
+                    <input type="submit" class="btn btn-primary mb-3" value="save">
                 </form>
 
                 <!-- <button onclick="toggleLanguage()">Switch Language</button> -->
@@ -52,7 +52,7 @@
                         <option value="{{ loop.index - 1 }}">{{ option }}</option>
                         {% endfor %}
                     </select>
-                    <input type="submit" class="btn btn-dark" value="Select and Generate">
+                    <input type="submit" class="btn btn-primary mb-3" value="Select and Generate">
                 </form>
             </div>
             <!-- </div> -->
