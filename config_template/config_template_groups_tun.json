@@ -8,7 +8,7 @@
       {
         "tag": "proxyDns",
         "address": "8.8.8.8",
-        "detour": "SB-VIEFAST 🦑🦜"
+        "detour": "SB-VIEFAST🦑🦜"
       },
       {
         "tag": "localDns",
@@ -71,7 +71,7 @@
   ],
   "outbounds": [
     {
-      "tag":"SB-VIEFAST 🦑🦜",
+      "tag":"SB-VIEFAST🦑🦜",
       "type":"selector",
       "outbounds":[
         "🇻🇳 VIỆT NAM auto",
@@ -149,7 +149,7 @@
   "route": {
     "auto_detect_interface": true,
     "override_android_vpn": false,
-    "final": "SB-VIEFAST 🦑🦜",
+    "final": "SB-VIEFAST🦑🦜",
     "rules": [
       {
         "protocol": "dns",

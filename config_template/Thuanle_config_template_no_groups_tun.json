@@ -6,40 +6,46 @@
   "dns": {
     "servers": [
       {
-        "tag": "proxy-dns",
-        "address": "94.140.14.14",
-        "strategy": "ipv4_only",
-        "detour": "THUANLE_PRO🌶"
+        "tag": "proxyDns",
+        "address": "8.8.8.8",
+        "detour": "SB-VIEFAST🦑🦜"
       },
       {
-        "tag": "block-dns",
+        "tag": "localDns",
+        "address": "local",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+      {
+        "tag": "block",
         "address": "rcode://success"
+      },
+      {
+        "tag": "remote",
+        "address": "fakeip"
       }
     ],
     "rules": [
       {
-        "domain_suffix": [
-          ".arpa.",
-          ".arpa"
+        "outbound": "any",
+        "server": "localDns",
+        "disable_cache": true
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
         ],
-        "server": "block-dns",
-        "rewrite_ttl": 20
-      },
-      {
-        "network": "udp",
-        "port": 443,
-        "server": "block-dns",
-        "rewrite_ttl": 20
-      },
-      {
-        "outbound": "THUANLE_PRO🌶",
-        "server": "proxy-dns",
-        "rewrite_ttl": 20
+        "server": "remote"
       }
     ],
-    "reverse_mapping": true,
-    "strategy": "ipv4_only",
-    "independent_cache": true
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    },
+    "independent_cache": true,
+    "strategy": "ipv4_only"
   },
   "inbounds": [
     {
@@ -64,7 +70,7 @@
   ],
   "outbounds": [
     {
-      "tag": "THUANLE_PRO🌶",
+      "tag": "SB-VIEFAST🦑🦜",
       "type": "selector",
       "outbounds": [
         "🇻🇳 VIỆT NAM auto",
@@ -147,6 +153,13 @@
       "tolerance": 50
     },
     {
+      "tag": "🌌 Google",
+      "type": "selector",
+      "outbounds": [
+        "{all}"
+      ]
+    },
+    {
       "type": "direct",
       "tag": "direct"
     },
@@ -161,26 +174,31 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "override_android_vpn": true,
+    "override_android_vpn": false,
     "geoip": {
       "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
-      "download_detour": "🇻🇳 VIỆT NAM auto"
+      "download_detour": "SB-VIEFAST🦑🦜"
     },
     "geosite": {
       "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
-      "download_detour": "🇻🇳 VIỆT NAM auto"
+      "download_detour": "SB-VIEFAST🦑🦜"
     },
-    "final": "THUANLE_PRO🌶",
+    "final": "SB-VIEFAST🦑🦜",
     "rules": [
       {
         "rule_set": "geosite-youtube",
-        "outbound": "🇻🇳 VIỆT NAM auto"
+        "outbound": "🌌 Google"
+      },
+      {
+        "rule_set": "geoip-gg",
+        "outbound": "🌌 Google"
       },
       {
         "rule_set": [
-          "geosite-google"
+          "geosite-google",
+          "geosite-github"
         ],
-        "outbound": "block"
+        "outbound": "🌌 Google"
       },
       {
         "protocol": "dns",
@@ -189,12 +207,6 @@
       {
         "network": "udp",
         "port": 443,
-        "outbound": "block"
-      },
-      {
-        "geosite": [
-          "google-ads"
-        ],
         "outbound": "block"
       },
       {
@@ -223,18 +235,186 @@
     ],
     "rule_set": [
       {
+        "tag": "geoip-gg",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-gg.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geoip-tg",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-tg.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geoip-tw",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-tw.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geoip-fk",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-fk.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-openai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-openai.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
         "tag": "geosite-youtube",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
-        "download_detour": "🇻🇳 VIỆT NAM auto"
+        "download_detour": "SB-VIEFAST🦑🦜"
       },
       {
         "tag": "geosite-google",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
-        "download_detour": "🇻🇳 VIỆT NAM auto"
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-github",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-telegram",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-twitter",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-facebook",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-facebook.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-instagram",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-instagram.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-amazon",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-amazon.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-apple",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-apple.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-microsoft",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-microsoft.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-category-games",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-games.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-bilibili",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bilibili.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-tiktok",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tiktok.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-netflix",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-netflix.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-hbo",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-hbo.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-disney",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-disney.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-primevideo",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-primevideo.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
+      },
+      {
+        "tag": "geosite-category-ads-all",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+        "download_detour": "SB-VIEFAST🦑🦜"
       }
     ]
   },
