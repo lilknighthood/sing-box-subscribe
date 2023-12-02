@@ -15,7 +15,7 @@
                 "tag": "Internet-dns",
                 "address": "1.0.0.1",
                 "strategy": "ipv4_only",
-                "detour": "THUANLE_PRO🌶"
+                "detour": "Game_Noti_ios📱🍎"
             },
             {
                 "tag": "Best Latency-dns",
@@ -68,7 +68,7 @@
                 "rewrite_ttl": 20
             },
             {
-                "outbound": "THUANLE_PRO🌶",
+                "outbound": "Game_Noti_ios📱🍎",
                 "server": "Internet-dns",
                 "rewrite_ttl": 20
             },
@@ -130,7 +130,7 @@
     ],
     "outbounds": [
         {
-            "tag": "THUANLE_PRO🌶",
+            "tag": "Game_Noti_ios📱🍎",
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
@@ -159,7 +159,7 @@
             "type": "selector",
             "tag": "WhatsApp",
             "outbounds": [
-                "THUANLE_PRO🌶",
+                "Game_Noti_ios📱🍎",
                 "Best Latency"
             ]
         },
@@ -167,7 +167,7 @@
             "type": "selector",
             "tag": "GAMESMAX(ML/FF/AOV)",
             "outbounds": [
-                "THUANLE_PRO🌶",
+                "Game_Noti_ios📱🍎",
                 "Best Latency"
             ]
         },
@@ -175,7 +175,7 @@
             "type": "selector",
             "tag": "Route Port Game",
             "outbounds": [
-                "THUANLE_PRO🌶",
+                "Game_Noti_ios📱🍎",
                 "Best Latency"
             ]
         },
@@ -195,7 +195,7 @@
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "THUANLE_PRO🌶",
+        "final": "Game_Noti_ios📱🍎",
         "geoip": {
             "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
             "download_detour": "Best Latency"
@@ -222,7 +222,7 @@
                 "domain_suffix": [
                     "googlesyndication.com"
                 ],
-                "outbound": "THUANLE_PRO🌶"
+                "outbound": "Game_Noti_ios📱🍎"
             },
             {
                 "geosite": "whatsapp",
@@ -244,7 +244,7 @@
             },
             {
                 "protocol": "stun",
-                "outbound": "THUANLE_PRO🌶"
+                "outbound": "Game_Noti_ios📱🍎"
             },
             {
                 "network": "udp",
@@ -565,7 +565,7 @@
                     8889,
                     42069
                 ],
-                "outbound": "THUANLE_PRO🌶"
+                "outbound": "Game_Noti_ios📱🍎"
             },
             {
                 "port_range": [
