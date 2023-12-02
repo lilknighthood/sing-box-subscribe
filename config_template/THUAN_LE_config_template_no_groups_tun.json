@@ -8,7 +8,7 @@
       {
         "tag": "proxyDns",
         "address": "8.8.8.8",
-        "detour": "SB-VIEFAST 🐲🦞🦑🦜"
+        "detour": "THUANLE PRO 🚀🐔🫏🦩"
       },
       {
         "tag": "localDns",
@@ -61,7 +61,7 @@
   ],
   "outbounds": [
     {
-      "tag": "SB-VIEFAST 🐲🦞🦑🦜",
+      "tag": "THUANLE PRO 🚀🐔🫏🦩",
       "type": "selector",
       "outbounds": [
         "🇻🇳 VIỆT NAM auto",
@@ -159,8 +159,26 @@
   "route": {
     "auto_detect_interface": true,
     "override_android_vpn": true,
-    "final": "SB-VIEFAST 🐲🦞🦑🦜",
+    "geoip": {
+      "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
+      "download_detour": "🇻🇳 VIỆT NAM auto"
+    },
+    "geosite": {
+      "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
+      "download_detour": "🇻🇳 VIỆT NAM auto"
+    },
+    "final": "THUANLE PRO 🚀🐔🫏🦩",
     "rules": [
+      {
+        "rule_set": "geosite-youtube",
+        "outbound": "🇻🇳 VIỆT NAM auto"
+      },
+      {
+        "rule_set": [
+          "geosite-google"
+        ],
+        "outbound": "block"
+      },
       {
         "protocol": "dns",
         "outbound": "dns-out"
@@ -168,6 +186,18 @@
       {
         "network": "udp",
         "port": 443,
+        "outbound": "block"
+      },
+      {
+        "domain_suffix":[
+          "googlesyndication.com"
+        ],
+        "outbound":"THUANLE PRO 🚀🐔🫏🦩"
+      },
+      {
+        "geosite": [
+          "google-ads"
+        ],
         "outbound": "block"
       },
       {
@@ -192,6 +222,22 @@
           "224.0.0.0/3",
           "ff00::/8"
         ]
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geosite-youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
+        "download_detour": "🇻🇳 VIỆT NAM auto"
+      },
+      {
+        "tag": "geosite-google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+        "download_detour": "🇻🇳 VIỆT NAM auto"
       }
     ]
   },
