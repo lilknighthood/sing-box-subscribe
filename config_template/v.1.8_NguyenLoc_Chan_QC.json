@@ -1,0 +1,270 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "proxy-dns",
+        "address": "94.140.14.14",
+        "strategy": "ipv4_only",
+        "detour": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          ".arpa.",
+          ".arpa"
+        ],
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈",
+        "server": "proxy-dns",
+        "rewrite_ttl": 20
+      }
+    ],
+    "reverse_mapping": true,
+    "strategy": "ipv4_only",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "inet4_address": "172.19.0.1/30",
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "endpoint_independent_nat": false,
+      "sniff": false
+    },
+    {
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": false,
+      "tag": "mixed-in",
+      "type": "mixed"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈",
+      "type": "selector",
+      "outbounds": [
+        "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻",
+        "𝕳𝖔𝖓𝖌𝕶𝖔𝖓𝖌𝖁𝕴𝕻",
+        "𝕾𝖎𝖓𝖌𝖆𝖕𝖔𝖗𝖊𝖁𝕴𝕻",
+        "𝕵𝖆𝖕𝖆𝖓𝖁𝕴𝕻",
+        "𝕰𝖚𝖗𝖔𝖁𝕴𝕻",
+        "{all}"
+      ]
+    },
+    {
+      "tag": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻",
+      "type": "urltest",
+      "outbounds": [
+        "direct",
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇻🇳|VN"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "𝕳𝖔𝖓𝖌𝕶𝖔𝖓𝖌𝖁𝕴𝕻",
+      "type": "urltest",
+      "outbounds": [
+        "direct",
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇭🇰|HK"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "𝕵𝖆𝖕𝖆𝖓𝖁𝕴𝕻",
+      "type": "urltest",
+      "outbounds": [
+        "direct",
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇯🇵|JP"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "𝕾𝖎𝖓𝖌𝖆𝖕𝖔𝖗𝖊𝖁𝕴𝕻",
+      "type": "urltest",
+      "outbounds": [
+        "direct",
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇸🇬|SG"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "𝕰𝖚𝖗𝖔𝖁𝕴𝕻",
+      "type": "urltest",
+      "outbounds": [
+        "direct",
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN|🇯🇵|JP"
+          ]
+        }
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "override_android_vpn": true,
+    "geoip": {
+      "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
+      "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+    },
+    "geosite": {
+      "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
+      "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+    },
+    "final": "𝕹𝖌𝖚𝖞𝖊𝖓𝕷𝖔𝖈",
+    "rules": [
+      {
+        "rule_set": "geosite-youtube",
+        "outbound": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+      },
+      {
+        "rule_set": [
+          "geosite-google"
+        ],
+        "outbound": "block"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "outbound": "block"
+      },
+      {
+        "geosite": [
+          "google-ads"
+        ],
+        "outbound": "block"
+      },
+      {
+        "inbound": [
+          "dns-in"
+        ],
+        "outbound": "dns-out"
+      },
+      {
+        "outbound": "dns-out",
+        "port": [
+          53
+        ]
+      },
+      {
+        "ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ],
+        "outbound": "block",
+        "source_ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ]
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geosite-youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
+        "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+      },
+      {
+        "tag": "geosite-google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+        "download_detour": "𝖁𝖎𝖊𝖙𝕹𝖆𝖒𝖁𝕴𝕻"
+      }
+    ]
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090"
+    }
+  }
+}
