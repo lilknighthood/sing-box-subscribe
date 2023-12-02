@@ -42,7 +42,7 @@
                 <form id="temp-json-form" method="POST" action="/edit_temp_json">
                     <textarea name="temp_json_data" class="form-control" id="exampleFormControlTextarea1" rows="3" cols="40"style="width: 100%; height: 400px">{{ temp_json_data | default('') }}</textarea>
                     <br>
-                    <input type="submit" class="btn btn-primary mb-3" value="1. Lưu">
+                    <input type="submit" class="btn btn-success" value="1. Lưu">
                 </form>
 
                 <!-- <button onclick="toggleLanguage()">Switch Language</button> -->
@@ -53,7 +53,7 @@
                         <option value="{{ loop.index - 1 }}">{{ option }}</option>
                         {% endfor %}
                     </select>
-                    <input type="submit" class="btn btn-primary mb-3" value="2. Tạo file">
+                    <input type="submit" class="btn btn-success" value="2. Tạo file">
                 </form>
             </div>
             <!-- </div> -->
