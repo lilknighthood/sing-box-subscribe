@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": "info",
+    "level": "debug",
     "timestamp": true
   },
   "dns": {
@@ -8,7 +8,7 @@
       {
         "tag": "proxyDns",
         "address": "8.8.8.8",
-        "detour": "SB-VIEFAST 🚀"
+        "detour": "proxy"
       },
       {
         "tag": "localDns",
@@ -21,7 +21,6 @@
       }
     ],
     "rules": [
-      
       {
         "outbound": "any",
         "server": "localDns",
@@ -41,27 +40,24 @@
   "inbounds": [
     {
       "type": "tun",
-      "tag": "tun-in",
-      "interface_name": "tun0",
       "inet4_address": "172.19.0.1/30",
       "mtu": 9000,
       "auto_route": true,
       "strict_route": true,
-      "stack": "system",
+      "sniff": false,
       "endpoint_independent_nat": false,
-      "sniff": false
+      "stack": "system"
     },
     {
-      "listen": "0.0.0.0",
+      "type": "mixed",
+      "listen": "127.0.0.1",
       "listen_port": 2080,
-      "sniff": false,
-      "tag": "mixed-in",
-      "type": "mixed"
+      "sniff": false
     }
   ],
   "outbounds": [
     {
-      "tag":"SB-VIEFAST 🚀",
+      "tag":"proxy",
       "type":"selector",
       "outbounds":[
         "🇻🇳 VIỆT NAM auto",
@@ -138,8 +134,8 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "override_android_vpn": false,
-    "final": "SB-VIEFAST 🚀",
+    "override_android_vpn": true,
+    "final": "proxy",
     "rules": [
       {
         "protocol": "dns",
@@ -149,12 +145,6 @@
         "network": "udp",
         "port": 443,
         "outbound": "block"
-      },
-      {
-        "inbound": [
-          "dns-in"
-        ],
-        "outbound": "dns-out"
       },
       {
         "outbound": "dns-out",
