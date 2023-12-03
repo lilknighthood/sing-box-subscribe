@@ -90,7 +90,6 @@
             "tag": "🇻🇳 VIỆT NAM auto",
             "type": "selector",
             "outbounds": [
-                "direct",
                 "{all}"
             ],
             "filter": [
@@ -106,7 +105,7 @@
             "tag": "🇭🇰 HONGKONG auto",
             "type": "selector",
             "outbounds": [
-                "direct",
+                
                 "{all}"
             ],
             "filter": [
