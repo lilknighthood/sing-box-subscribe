@@ -22,10 +22,12 @@
                     <form method="POST" action="/generate_config"><select class="form-select form-select-lg mb-3" name="template_index"> {% for option in template_options %} <option value="{{ loop.index - 1 }}">{{ option }}</option> {% endfor %} </select> <input type="submit" class="btn btn-success" value="2. Tạo file">
                     </form>
                 </div><!-- </div> main -->
-            </div> <!-- DIV content -->
-            <div class="config-content">
+
+<div class="config-content">
                 <pre id="config-text"></pre>
             </div>
+            </div> <!-- DIV content -->
+            
             <script>
         const initialTempJsonData = '{"subscribes":[{"url":"URLLINK","tag":"tag_1","enabled":true,"emoji":1,"prefix":"","User-Agent":"v2rayng"}],"auto_set_outbounds_dns":{"proxy":"","direct":""},"save_config_path":"./config.json","auto_backup":false,"exclude_protocol":"ssr","config_template":"","Only-nodes":false}';
         let tempJsonData = initialTempJsonData;
