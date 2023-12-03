@@ -21,20 +21,7 @@
                 "tag": "Best Latency-dns",
                 "address": "1.1.1.1",
                 "strategy": "ipv4_only",
-                "detour": "Game_Noti_ios📱🍎"
-            },
-            {
-                "tag": "wireguard-dns",
-                "port": 51820,
-                "peers": [
-                    {
-                        "allowedIps": [
-                            "0.0.0.0/0",
-                            "::/0"
-                        ]
-                    }
-                ],
-                "detour": "wireguard"
+                "detour": "🇻🇳 VIỆT NAM auto"
             },
             {
                 "tag": "WhatsApp-dns",
@@ -75,12 +62,6 @@
                 "rewrite_ttl": 20
             },
             {
-                "network": "udp",
-                "port": 443,
-                "server": "block-dns",
-                "rewrite_ttl": 20
-            },
-            {
                 "outbound": "Game_Noti_ios📱🍎",
                 "server": "Internet-dns",
                 "rewrite_ttl": 20
@@ -93,11 +74,6 @@
             {
                 "outbound": "WhatsApp",
                 "server": "WhatsApp-dns",
-                "rewrite_ttl": 20
-            },
-            {
-                "outbound": "wireguard",
-                "server": "wireguard-dns",
                 "rewrite_ttl": 20
             },
             {
@@ -131,12 +107,12 @@
             "tag": "tun-in",
             "interface_name": "tun0",
             "inet4_address": "172.19.0.1/30",
-            "mtu": 1400,
+            "mtu": 9000,
             "auto_route": true,
             "strict_route": true,
             "stack": "system",
-            "endpoint_independent_nat": true,
-            "sniff": false
+            "endpoint_independent_nat": false,
+            "sniff": true
         },
         {
             "listen": "0.0.0.0",
@@ -176,14 +152,6 @@
         {
             "type": "selector",
             "tag": "WhatsApp",
-            "outbounds": [
-                "🇻🇳 VIỆT NAM auto",
-                "Game_Noti_ios📱🍎"
-            ]
-        },
-        {
-            "type": "selector",
-            "tag": "wireguard",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
                 "Game_Noti_ios📱🍎"
@@ -236,13 +204,6 @@
                 "port": [
                     53
                 ]
-            },
-            {
-                "network": "udp",
-                "port": [
-                    443
-                ],
-                "outbound": "block"
             },
             {
                 "domain_suffix": [
