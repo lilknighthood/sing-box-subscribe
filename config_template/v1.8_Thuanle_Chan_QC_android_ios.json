@@ -78,7 +78,7 @@
       "tag": "🇻🇳 VIỆT NAM auto",
       "type": "urltest",
       "outbounds": [
-        "direct",
+       
         "{all}"
       ],
       "filter": [
@@ -97,7 +97,7 @@
       "tag": "🇭🇰 HONGKONG auto",
       "type": "urltest",
       "outbounds": [
-        "direct",
+      
         "{all}"
       ],
       "filter": [
@@ -116,7 +116,7 @@
       "tag": "🇸🇬 SINGAPORE auto",
       "type": "urltest",
       "outbounds": [
-        "direct",
+       
         "{all}"
       ],
       "filter": [
@@ -135,7 +135,7 @@
       "tag": "🚀 THẬP CẨM auto",
       "type": "urltest",
       "outbounds": [
-        "direct",
+       
         "{all}"
       ],
       "filter": [
