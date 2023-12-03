@@ -79,7 +79,7 @@
       "tag": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
-        "direct",
+        
         "{all}"
       ],
       "filter": [
@@ -98,7 +98,7 @@
       "tag": "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
-        "direct",
+        
         "{all}"
       ],
       "filter": [
@@ -117,7 +117,7 @@
       "tag": "ᴊᴀᴘᴀɴᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
-        "direct",
+       
         "{all}"
       ],
       "filter": [
@@ -136,7 +136,7 @@
       "tag": "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
-        "direct",
+        
         "{all}"
       ],
       "filter": [
@@ -155,7 +155,7 @@
       "tag": "ᴇᴜʀᴏᴠɪᴘ",
       "type": "urltest",
       "outbounds": [
-        "direct",
+        
         "{all}"
       ],
       "filter": [
