@@ -61,19 +61,8 @@
             "tag": "VIEFAST VIP",
             "type": "selector",
             "outbounds": [
-                "🇻🇳 VIỆT NAM auto",
                 "{all}"
             ]
-        },
-        {
-            "tag": "🇻🇳 VIỆT NAM auto",
-            "type": "urltest",
-            "outbounds": [
-                "{all}"
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
         },
         {
             "type": "direct",
