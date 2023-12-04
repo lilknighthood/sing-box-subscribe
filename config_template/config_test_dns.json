@@ -1,52 +1,56 @@
 {
-    "log": {
-        "disabled": false,
-        "level": "info",
-        "timestamp": true
+    "dns": {
+        "independent_cache": true,
+        "rules": [
+            {
+                "disable_cache": true,
+                "outbound": "any",
+                "server": "localDns"
+            },
+            {
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "remote"
+            }
+        ],
+        "servers": [
+            {
+                "address": "8.8.8.8",
+                "detour": "select",
+                "tag": "proxyDns"
+            },
+            {
+                "address": "local",
+                "detour": "direct",
+                "strategy": "ipv4_only",
+                "tag": "localDns"
+            },
+            {
+                "address": "rcode://success",
+                "tag": "block"
+            }
+        ],
+        "strategy": "ipv4_only"
     },
     "experimental": {
         "clash_api": {
             "external_controller": "127.0.0.1:9090"
         }
     },
-    "dns": {
-        "servers": [
-            {
-                "tag": "proxy-dns",
-                "address": "94.140.14.14",
-                "strategy": "ipv4_only",
-                "detour": "VIEFAST VIP"
-            },
-            {
-                "tag": "direct-dns",
-                "address": "local",
-                "strategy": "ipv4_only",
-                "detour": "direct"
-            }
-        ],
-        "rules": [
-            {
-                "outbound": "direct",
-                "server": "direct-dns",
-                "rewrite_ttl": 20
-            }
-        ],
-        "reverse_mapping": true,
-        "strategy": "ipv4_only",
-        "independent_cache": true
-    },
     "inbounds": [
         {
-            "type": "tun",
-            "tag": "tun-in",
-            "interface_name": "tun0",
-            "inet4_address": "172.19.0.1/30",
-            "mtu": 9000,
             "auto_route": true,
-            "strict_route": true,
-            "stack": "system",
             "endpoint_independent_nat": false,
-            "sniff": false
+            "inet4_address": "172.19.0.1/30",
+            "interface_name": "tun0",
+            "mtu": 1300,
+            "sniff": false,
+            "stack": "system",
+            "strict_route": true,
+            "tag": "tun-in",
+            "type": "tun"
         },
         {
             "listen": "0.0.0.0",
@@ -56,32 +60,62 @@
             "type": "mixed"
         }
     ],
+    "log": {
+        "level": "info",
+        "timestamp": true
+    },
     "outbounds": [
         {
-            "tag": "VIEFAST VIP",
+            "tag": "select",
             "type": "selector",
+            "default": "urltest",
             "outbounds": [
                 "{all}"
             ]
         },
         {
-            "type": "direct",
-            "tag": "direct"
+            "tag": "direct",
+            "type": "direct"
         },
         {
-            "type": "dns",
-            "tag": "dns-out"
+            "tag": "block",
+            "type": "block"
+        },
+        {
+            "tag": "dns-out",
+            "type": "dns"
         }
     ],
     "route": {
         "auto_detect_interface": true,
+        "final": "select",
         "override_android_vpn": true,
-        "final": "VIEFAST VIP",
         "rules": [
+            {
+                "outbound": "dns-out",
+                "protocol": "dns"
+            },
+            {
+                "inbound": [
+                    "dns-in"
+                ],
+                "outbound": "dns-out"
+            },
             {
                 "outbound": "dns-out",
                 "port": [
                     53
+                ]
+            },
+            {
+                "ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
+                ],
+                "outbound": "block",
+                "source_ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
                 ]
             }
         ]
