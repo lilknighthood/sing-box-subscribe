@@ -1,0 +1,199 @@
+{
+    "log": {
+        "disabled": false,
+        "level": "error",
+        "timestamp": false
+    },
+    "dns": {
+        "final": "dns_remote",
+        "strategy": "ipv4_only",
+        "disable_cache": false,
+        "disable_expire": false,
+        "servers": [
+            {
+                "tag": "dns_remote",
+                "address": "8.8.8.8",
+                "detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
+            }
+        ],
+        "rules": null
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "interface_name": "tun0",
+            "inet4_address": "172.19.0.1/30",
+            "mtu": 1300,
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "system",
+            "endpoint_independent_nat": false,
+            "sniff": false
+        },
+        {
+            "listen": "0.0.0.0",
+            "listen_port": 2080,
+            "sniff": false,
+            "tag": "mixed-in",
+            "type": "mixed"
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
+            "type": "selector",
+            "outbounds": [
+                "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
+                "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
+                "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
+                "ᴊᴀᴘᴀɴᴠɪᴘ",
+                "ᴇᴜʀᴏᴠɪᴘ",
+                "{all}"
+            ]
+        },
+        {
+            "tag": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇻🇳|VN"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇭🇰|HK"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "ᴊᴀᴘᴀɴᴠɪᴘ",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇯🇵|JP"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇸🇬|SG"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "ᴇᴜʀᴏᴠɪᴘ",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "exclude",
+                    "keywords": [
+                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN|🇯🇵|JP"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "type": "direct",
+            "tag": "direct"
+        },
+        {
+            "type": "block",
+            "tag": "block"
+        },
+        {
+            "type": "dns",
+            "tag": "dns-out"
+        }
+    ],
+    "route": {
+        "final": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
+        "geoip": {
+            "download_detour": "direct"
+        },
+        "geosite": {
+            "download_detour": "direct"
+        },
+        "rules": [
+            {
+                "protocol": "dns",
+                "port": [
+                    53
+                ],
+                "outbound": "dns-out"
+            },
+            {
+                "protocol": [
+                    "quic"
+                ],
+                "port": [
+                    443
+                ],
+                "network": "udp",
+                "geosite": "youtube",
+                "outbound": "block"
+            },
+            {
+                "network": "udp",
+                "outbound": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
+            }
+        ],
+        "find_process": true,
+        "auto_detect_interface": true,
+        "override_android_vpn": true
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "127.0.0.1::9090"
+        }
+    }
+}
