@@ -15,7 +15,7 @@
                 "tag": "proxy-dns",
                 "address": "94.140.14.14",
                 "strategy": "ipv4_only",
-                "detour": "VIEFAST VIP"
+                "detour": "VIEFAST ADS"
             },
             {
                 "tag": "auto-dns",
@@ -32,7 +32,7 @@
         ],
         "rules": [
             {
-                "outbound": "VIEFAST VIP",
+                "outbound": "VIEFAST ADS",
                 "server": "proxy-dns",
                 "rewrite_ttl": 20
             },
@@ -79,7 +79,7 @@
     ],
     "outbounds": [
         {
-            "tag": "VIEFAST VIP",
+            "tag": "VIEFAST ADS",
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
@@ -177,7 +177,7 @@
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "VIEFAST VIP",
+        "final": "VIEFAST ADS",
         "rules": [
             {
                 "inbound": [
