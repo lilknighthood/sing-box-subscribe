@@ -12,45 +12,47 @@
     "dns": {
         "servers": [
             {
-                "tag": "proxy-dns",
-                "address": "94.140.14.14",
+                "tag": "select-dns",
+                "address": "8.8.4.4",
                 "strategy": "ipv4_only",
-                "detour": "VIEFAST VIP"
-            },
-            {
-                "tag": "auto-dns",
-                "address": "94.140.14.15",
-                "strategy": "ipv4_only",
-                "detour": "🇻🇳 VIỆT NAM auto"
+                "detour": "SB 🚀⚡"
             },
             {
                 "tag": "direct-dns",
                 "address": "local",
                 "strategy": "ipv4_only",
                 "detour": "direct"
+            },
+            {
+                "tag": "block-dns",
+                "address": "rcode://success"
             }
         ],
         "rules": [
             {
-                "outbound": "VIEFAST VIP",
-                "server": "proxy-dns",
+                "domain_suffix": [
+                    ".arpa.",
+                    ".arpa"
+                ],
+                "server": "block-dns",
                 "rewrite_ttl": 20
             },
             {
-                "outbound": "🇻🇳 VIỆT NAM auto",
-                "server": "auto-dns",
+                "network": "udp",
+                "port": 443,
+                "server": "block-dns",
                 "rewrite_ttl": 20
             },
             {
-                "outbound": "direct",
-                "server": "direct-dns",
+                "outbound": "SB 🚀⚡",
+                "server": "select-dns",
                 "rewrite_ttl": 20
             },
             {
                 "outbound": "any",
                 "server": "direct-dns",
                 "rewrite_ttl": 20
-            }
+              }
         ],
         "reverse_mapping": true,
         "strategy": "ipv4_only",
@@ -79,7 +81,7 @@
     ],
     "outbounds": [
         {
-            "tag": "VIEFAST VIP",
+            "tag": "SB 🚀⚡",
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
@@ -91,7 +93,7 @@
         },
         {
             "tag": "🇻🇳 VIỆT NAM auto",
-            "type": "urltest",
+            "type": "selector",
             "outbounds": [
                 "{all}"
             ],
@@ -102,28 +104,23 @@
                         "🇻🇳|VN"
                     ]
                 }
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
+            ]
         },
         {
             "tag": "🇭🇰 HONGKONG auto",
-            "type": "urltest",
+            "type": "selector",
             "outbounds": [
+                
                 "{all}"
             ],
             "filter": [
                 {
                     "action": "include",
                     "keywords": [
-                        "🇭🇰|HK"
+                        "🇭🇰|HK|hk|香港|港|🇹🇼|TW|tw|台湾|臺灣|台"
                     ]
                 }
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
+            ]
         },
         {
             "tag": "🇸🇬 SINGAPORE auto",
@@ -162,23 +159,36 @@
             "tolerance": 50
         },
         {
-            "type": "dns",
-            "tag": "dns-in"
-        },
-        {
             "type": "direct",
             "tag": "direct"
         },
         {
             "type": "dns",
             "tag": "dns-out"
+        },
+        {
+            "type": "block",
+            "tag": "block"
         }
     ],
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "VIEFAST VIP",
+        "final": "SB 🚀⚡",
         "rules": [
+            {
+                "network": "udp",
+                "port": [
+                    443
+                ],
+                "outbound": "block"
+            },
+            {
+                "domain_suffix": [
+                    "googlesyndication.com"
+                ],
+                "outbound": "SB 🚀⚡"
+            },
             {
                 "inbound": [
                     "dns-in"
@@ -189,6 +199,17 @@
                 "outbound": "dns-out",
                 "port": [
                     53
+                ]
+            },
+            {
+                "ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
+                ],
+                "outbound": "block",
+                "source_ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
                 ]
             }
         ]

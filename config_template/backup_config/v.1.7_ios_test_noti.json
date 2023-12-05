@@ -1,13 +1,7 @@
 {
     "log": {
-        "disabled": false,
         "level": "info",
         "timestamp": true
-    },
-    "experimental": {
-        "clash_api": {
-            "external_controller": "127.0.0.1:9090"
-        }
     },
     "dns": {
         "servers": [
@@ -15,42 +9,24 @@
                 "tag": "proxy-dns",
                 "address": "94.140.14.14",
                 "strategy": "ipv4_only",
-                "detour": "VIEFAST VIP"
+                "detour": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝"
             },
             {
-                "tag": "auto-dns",
-                "address": "94.140.14.15",
-                "strategy": "ipv4_only",
-                "detour": "🇻🇳 VIỆT NAM auto"
-            },
-            {
-                "tag": "direct-dns",
-                "address": "local",
-                "strategy": "ipv4_only",
-                "detour": "direct"
+                "tag": "block-dns",
+                "address": "rcode://success"
             }
         ],
         "rules": [
             {
-                "outbound": "VIEFAST VIP",
+                "outbound": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
                 "server": "proxy-dns",
-                "rewrite_ttl": 20
-            },
-            {
-                "outbound": "🇻🇳 VIỆT NAM auto",
-                "server": "auto-dns",
-                "rewrite_ttl": 20
-            },
-            {
-                "outbound": "direct",
-                "server": "direct-dns",
                 "rewrite_ttl": 20
             },
             {
                 "outbound": "any",
                 "server": "direct-dns",
                 "rewrite_ttl": 20
-            }
+              }
         ],
         "reverse_mapping": true,
         "strategy": "ipv4_only",
@@ -62,7 +38,7 @@
             "tag": "tun-in",
             "interface_name": "tun0",
             "inet4_address": "172.19.0.1/30",
-            "mtu": 9000,
+            "mtu": 1300,
             "auto_route": true,
             "strict_route": true,
             "stack": "system",
@@ -79,18 +55,19 @@
     ],
     "outbounds": [
         {
-            "tag": "VIEFAST VIP",
+            "tag": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
             "type": "selector",
             "outbounds": [
-                "🇻🇳 VIỆT NAM auto",
-                "🇭🇰 HONGKONG auto",
-                "🇸🇬 SINGAPORE auto",
-                "🚀 THẬP CẨM auto",
+                "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
+                "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
+                "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
+                "ᴊᴀᴘᴀɴᴠɪᴘ",
+                "ᴇᴜʀᴏᴠɪᴘ",
                 "{all}"
             ]
         },
         {
-            "tag": "🇻🇳 VIỆT NAM auto",
+            "tag": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ",
             "type": "urltest",
             "outbounds": [
                 "{all}"
@@ -108,7 +85,7 @@
             "tolerance": 50
         },
         {
-            "tag": "🇭🇰 HONGKONG auto",
+            "tag": "ʜᴏɴɢᴋᴏɴɢᴠɪᴘ",
             "type": "urltest",
             "outbounds": [
                 "{all}"
@@ -126,7 +103,25 @@
             "tolerance": 50
         },
         {
-            "tag": "🇸🇬 SINGAPORE auto",
+            "tag": "ᴊᴀᴘᴀɴᴠɪᴘ",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇯🇵|JP"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "ꜱɪɴɢᴀᴘᴏʀᴇᴠɪᴘ",
             "type": "urltest",
             "outbounds": [
                 "{all}"
@@ -144,7 +139,7 @@
             "tolerance": 50
         },
         {
-            "tag": "🚀 THẬP CẨM auto",
+            "tag": "ᴇᴜʀᴏᴠɪᴘ",
             "type": "urltest",
             "outbounds": [
                 "{all}"
@@ -153,7 +148,7 @@
                 {
                     "action": "exclude",
                     "keywords": [
-                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
+                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN|🇯🇵|JP"
                     ]
                 }
             ],
@@ -162,35 +157,81 @@
             "tolerance": 50
         },
         {
-            "type": "dns",
-            "tag": "dns-in"
-        },
-        {
             "type": "direct",
             "tag": "direct"
         },
         {
-            "type": "dns",
-            "tag": "dns-out"
+            "type": "block",
+            "tag": "block"
         }
     ],
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "VIEFAST VIP",
+        "geoip": {
+            "download_url": "https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db",
+            "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
+        },
+        "geosite": {
+            "download_url": "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.db",
+            "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
+        },
+        "final": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
         "rules": [
             {
-                "inbound": [
-                    "dns-in"
+                "rule_set": "geosite-youtube",
+                "outbound": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
+            },
+            {
+                "rule_set": [
+                    "geosite-google"
                 ],
-                "outbound": "dns-out"
+                "outbound": "block"
+            },
+            {
+                "geosite": [
+                    "google-ads"
+                ],
+                "outbound": "block"
             },
             {
                 "outbound": "dns-out",
                 "port": [
                     53
                 ]
+            },
+            {
+                "ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
+                ],
+                "outbound": "block",
+                "source_ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
+                ]
+            }
+        ],
+        "rule_set": [
+            {
+                "tag": "geosite-youtube",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
+                "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
+            },
+            {
+                "tag": "geosite-google",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+                "download_detour": "ᴠɪᴇᴛɴᴀᴍᴠɪᴘ"
             }
         ]
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "127.0.0.1:9090"
+        }
     }
 }

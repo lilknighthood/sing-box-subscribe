@@ -162,10 +162,6 @@
             "tolerance": 50
         },
         {
-            "type": "dns",
-            "tag": "dns-in"
-        },
-        {
             "type": "direct",
             "tag": "direct"
         },
@@ -179,12 +175,6 @@
         "override_android_vpn": true,
         "final": "VIEFAST VIP",
         "rules": [
-            {
-                "inbound": [
-                    "dns-in"
-                ],
-                "outbound": "dns-out"
-            },
             {
                 "outbound": "dns-out",
                 "port": [

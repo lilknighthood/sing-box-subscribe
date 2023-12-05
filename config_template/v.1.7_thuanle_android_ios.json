@@ -15,7 +15,7 @@
                 "tag": "select-dns",
                 "address": "8.8.4.4",
                 "strategy": "ipv4_only",
-                "detour": "SB 🚀⚡"
+                "detour": "VIEFAST 🚀"
             },
             {
                 "tag": "direct-dns",
@@ -44,7 +44,7 @@
                 "rewrite_ttl": 20
             },
             {
-                "outbound": "SB 🚀⚡",
+                "outbound": "VIEFAST 🚀",
                 "server": "select-dns",
                 "rewrite_ttl": 20
             },
@@ -81,7 +81,7 @@
     ],
     "outbounds": [
         {
-            "tag": "SB 🚀⚡",
+            "tag": "VIEFAST 🚀",
             "type": "selector",
             "outbounds": [
                 "🇻🇳 VIỆT NAM auto",
@@ -174,7 +174,7 @@
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
-        "final": "SB 🚀⚡",
+        "final": "VIEFAST 🚀",
         "rules": [
             {
                 "network": "udp",
@@ -187,7 +187,7 @@
                 "domain_suffix": [
                     "googlesyndication.com"
                 ],
-                "outbound": "SB 🚀⚡"
+                "outbound": "VIEFAST 🚀"
             },
             {
                 "inbound": [
