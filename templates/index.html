@@ -115,7 +115,16 @@
             {% for message in messages %}
             <li>{{ message }}</li> {% endfor %}
         </ul> {% endif %} {% endwith %}
-    
+    <script>
+        const header = document.querySelector('.header');
+        const container = document.querySelector('.container');
+
+
+        header.onclick= function(){
+            header.classList.header('active');
+            container.classList.header('dark');
+        }
+    </script>
     <footer class="footer">
         <section class="bg-light border-top py-3 py-md-4 py-xl-6">
             <div class="container overflow-hidden">

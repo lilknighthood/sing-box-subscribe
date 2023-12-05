@@ -4,33 +4,44 @@ body {
   font-weight: 300;
   margin: 0;
 }
-
+.root{
+  --black:#333;
+  --white: #f1f1f1;
+  --shadow: rgba(0,0,0,0.2);
+}
+.dark {
+  --black:#f1f1f1;
+  --white: #333;
+  --shadow:rgba(255,255,255,0.2);
+}
 .container {
   padding: 0.3em 1em;
 
 }
-
+container .p{
+  color: var(--black);
+}
 .header {
   color: MediumSeaGreen;
   padding: 0.3em 1em;
   text-align: center;
   border: 1px dashed DodgerBlue;
+  cursor: pointer;
+  user-select: none;
 }
 
 .header ::before {
   content: '\f135';
   font-family: fontAwesome;
   padding: 0.3em;
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 0 5px 10px var(--shadow);
   margin-right: 0.3em;
   font-size: 1.3em;
 }
 .header.active ::before {
   content: '\f072';
-  font-family: fontAwesome;
-  padding: 0.3em;
-  color: var(--white);
-  margin-right: 0.3em;
-  font-size: 1.3em;
 }
 
 
