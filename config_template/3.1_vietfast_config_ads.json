@@ -1,0 +1,196 @@
+{
+    "log": {
+        "disabled": false,
+        "level": "info",
+        "timestamp": true
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "127.0.0.1:9090"
+        }
+    },
+    "dns": {
+        "servers": [
+            {
+                "tag": "proxy-dns",
+                "address": "103.151.57.2",
+                "strategy": "ipv4_only",
+                "detour": "VIEFAST ADS"
+            },
+            {
+                "tag": "auto-dns",
+                "address": "103.151.57.2",
+                "strategy": "ipv4_only",
+                "detour": "🇻🇳 VIỆT NAM auto"
+            },
+            {
+                "tag": "direct-dns",
+                "address": "local",
+                "strategy": "ipv4_only",
+                "detour": "direct"
+            }
+        ],
+        "rules": [
+            {
+                "outbound": "VIEFAST ADS",
+                "server": "proxy-dns",
+                "rewrite_ttl": 20
+            },
+            {
+                "outbound": "🇻🇳 VIỆT NAM auto",
+                "server": "auto-dns",
+                "rewrite_ttl": 20
+            },
+            {
+                "outbound": "direct",
+                "server": "direct-dns",
+                "rewrite_ttl": 20
+            },
+            {
+                "outbound": "any",
+                "server": "direct-dns",
+                "rewrite_ttl": 20
+            }
+        ],
+        "reverse_mapping": true,
+        "strategy": "ipv4_only",
+        "independent_cache": true
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "interface_name": "tun0",
+            "inet4_address": "172.19.0.1/30",
+            "mtu": 9000,
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "system",
+            "endpoint_independent_nat": false,
+            "sniff": false
+        },
+        {
+            "listen": "0.0.0.0",
+            "listen_port": 2080,
+            "sniff": false,
+            "tag": "mixed-in",
+            "type": "mixed"
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "VIEFAST ADS",
+            "type": "selector",
+            "outbounds": [
+                "🇻🇳 VIỆT NAM auto",
+                "🇭🇰 HONGKONG auto",
+                "🇸🇬 SINGAPORE auto",
+                "🚀 THẬP CẨM auto",
+                "{all}"
+            ]
+        },
+        {
+            "tag": "🇻🇳 VIỆT NAM auto",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇻🇳|VN"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "🇭🇰 HONGKONG auto",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇭🇰|HK"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "🇸🇬 SINGAPORE auto",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "include",
+                    "keywords": [
+                        "🇸🇬|SG"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "tag": "🚀 THẬP CẨM auto",
+            "type": "urltest",
+            "outbounds": [
+                "{all}"
+            ],
+            "filter": [
+                {
+                    "action": "exclude",
+                    "keywords": [
+                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
+                    ]
+                }
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "type": "dns",
+            "tag": "dns-in"
+        },
+        {
+            "type": "direct",
+            "tag": "direct"
+        },
+        {
+            "type": "dns",
+            "tag": "dns-out"
+        }
+    ],
+    "route": {
+        "auto_detect_interface": true,
+        "override_android_vpn": true,
+        "final": "VIEFAST ADS",
+        "rules": [
+            {
+                "inbound": [
+                    "dns-in"
+                ],
+                "outbound": "dns-out"
+            },
+            {
+                "outbound": "dns-out",
+                "port": [
+                    53
+                ]
+            }
+        ]
+    }
+}
