@@ -16,6 +16,10 @@ body.{
     text-align: center;
     border: 1px dashed DodgerBlue;
 }
+.header ::before{
+  content: '\f135';
+  font-family: fontAwesome;
+}
 .content,
 .sidebar{
     box-sizing: border-box;
