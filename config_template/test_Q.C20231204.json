@@ -45,7 +45,12 @@
                 "outbound": "direct",
                 "server": "direct-dns",
                 "rewrite_ttl": 20
-            }
+            },
+            {
+                "outbound": "any",
+                "server": "direct-dns",
+                "rewrite_ttl": 20
+              }
         ],
         "reverse_mapping": true,
         "strategy": "ipv4_only",

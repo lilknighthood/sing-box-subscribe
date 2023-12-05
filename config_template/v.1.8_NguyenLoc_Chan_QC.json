@@ -35,6 +35,11 @@
         "outbound": "𝚂𝚞𝚋𝚉𝚒𝚗𝚐𝚏𝚊𝚜𝚝",
         "server": "proxy-dns",
         "rewrite_ttl": 20
+      },
+      {
+        "outbound": "any",
+        "server": "direct-dns",
+        "rewrite_ttl": 20
       }
     ],
     "reverse_mapping": true,
