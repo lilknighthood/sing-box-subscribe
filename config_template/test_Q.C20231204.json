@@ -18,6 +18,12 @@
                 "detour": "VIEFAST VIP"
             },
             {
+                "tag": "auto-dns",
+                "address": "94.140.14.15",
+                "strategy": "ipv4_only",
+                "detour": "🇻🇳 VIỆT NAM auto"
+            },
+            {
                 "tag": "direct-dns",
                 "address": "local",
                 "strategy": "ipv4_only",
@@ -25,6 +31,16 @@
             }
         ],
         "rules": [
+            {
+                "outbound": "VIEFAST VIP",
+                "server": "proxy-dns",
+                "rewrite_ttl": 20
+            },
+            {
+                "outbound": "🇻🇳 VIỆT NAM auto",
+                "server": "auto-dns",
+                "rewrite_ttl": 20
+            },
             {
                 "outbound": "direct",
                 "server": "direct-dns",
@@ -46,12 +62,12 @@
             "strict_route": true,
             "stack": "system",
             "endpoint_independent_nat": false,
-            "sniff": true
+            "sniff": false
         },
         {
             "listen": "0.0.0.0",
             "listen_port": 2080,
-            "sniff": true,
+            "sniff": false,
             "tag": "mixed-in",
             "type": "mixed"
         }
