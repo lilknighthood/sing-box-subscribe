@@ -12,6 +12,12 @@
                 "detour": "v.1.8_SB 🚀⚡"
             },
             {
+                "tag": "localDns",
+                "address": "local",
+                "strategy": "ipv4_only",
+                "detour": "direct"
+            },
+            {
                 "tag": "block-dns",
                 "address": "rcode://success"
             }
@@ -35,6 +41,11 @@
                 "outbound": "v.1.8_SB 🚀⚡",
                 "server": "proxy-dns",
                 "rewrite_ttl": 20
+            },
+            {
+                "outbound": "any",
+                "server": "localDns",
+                "disable_cache": true
             },
             {
                 "outbound": "any",
