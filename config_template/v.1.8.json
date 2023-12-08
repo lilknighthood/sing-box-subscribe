@@ -61,103 +61,83 @@
             "type": "mixed"
         }
     ],
-    "outbounds": [
-        {
-            "tag": "VIEFAST ads 1.8",
-            "type": "selector",
-            "outbounds": [
-                "🇻🇳 VIỆT NAM auto",
-                "🇭🇰 HONGKONG auto",
-                "🇸🇬 SINGAPORE auto",
-                "🚀 THẬP CẨM auto",
-                "{all}"
-            ]
-        },
-        {
-            "tag": "🇻🇳 VIỆT NAM auto",
-            "type": "urltest",
-            "outbounds": [
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "include",
-                    "keywords": [
-                        "🇻🇳|VN"
-                    ]
-                }
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
-        },
-        {
-            "tag": "🇭🇰 HONGKONG auto",
-            "type": "urltest",
-            "outbounds": [
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "include",
-                    "keywords": [
-                        "🇭🇰|HK"
-                    ]
-                }
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
-        },
-        {
-            "tag": "🇸🇬 SINGAPORE auto",
-            "type": "urltest",
-            "outbounds": [
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "include",
-                    "keywords": [
-                        "🇸🇬|SG"
-                    ]
-                }
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
-        },
-        {
-            "tag": "🚀 THẬP CẨM auto",
-            "type": "urltest",
-            "outbounds": [
-                "{all}"
-            ],
-            "filter": [
-                {
-                    "action": "exclude",
-                    "keywords": [
-                        "🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"
-                    ]
-                }
-            ],
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "1m",
-            "tolerance": 50
-        },
-        {
-            "type": "direct",
-            "tag": "direct"
-        },
-        {
-            "type": "dns",
-            "tag": "dns-out"
-        },
-        {
-            "type": "block",
-            "tag": "block"
-        }
-    ],
+"outbounds": [
+    {
+      "tag":"VIEFAST ads 1.8",
+      "type":"selector",
+      "outbounds":[
+        "🇻🇳 VIỆT NAM auto",
+        "🇭🇰 HONGKONG auto",
+        "🇸🇬 SINGAPORE auto",
+        "🚀 THẬP CẨM auto",
+        "{all}"
+      ]
+    },
+    {
+      "tag":"🇻🇳 VIỆT NAM auto",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇻🇳|VN"]}
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag":"🇭🇰 HONGKONG auto",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇭🇰|HK"]}
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag":"🇸🇬 SINGAPORE auto",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇸🇬|SG"]}
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag":"🚀 THẬP CẨM auto",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"exclude","keywords":["🇭🇰|HK|🇸🇬|SG|🇻🇳|VN"]}
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
     "route": {
         "auto_detect_interface": true,
         "override_android_vpn": true,
