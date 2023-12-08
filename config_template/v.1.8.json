@@ -183,28 +183,10 @@
                 "outbound": "dns-out"
             },
             {
-                "ip_is_private": true,
-                "outbound": "direct"
-            },
-            {
-                "domain_suffix": [
-                    ".cn"
-                ],
-                "outbound": "direct"
-            },
-            {
                 "outbound": "dns-out",
                 "port": [
                     53
                 ]
-            },
-            {
-                "rule_set": [
-                    "geoip-cn",
-                    "geosite-cn",
-                    "geosite-private"
-                ],
-                "outbound": "direct"
             },
             {
                 "rule_set": [
@@ -214,27 +196,6 @@
             }
         ],
         "rule_set": [
-            {
-                "tag": "geoip-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-                "download_detour": "VIEFAST ads 1.8"
-            },
-            {
-                "tag": "geosite-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-                "download_detour": "VIEFAST ads 1.8"
-            },
-            {
-                "tag": "geosite-private",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs",
-                "download_detour": "VIEFAST ads 1.8"
-            },
             {
                 "tag": "geosite-category-ads-all",
                 "type": "remote",
