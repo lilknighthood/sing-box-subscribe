@@ -110,7 +110,7 @@
             "tag": "🇭🇰 HONGKONG auto",
             "type": "selector",
             "outbounds": [
-                
+                "direct",
                 "{all}"
             ],
             "filter": [
@@ -126,7 +126,8 @@
             "tag": "🇸🇬 SINGAPORE auto",
             "type": "urltest",
             "outbounds": [
-                "{all}"
+                "direct",
+"{all}"
             ],
             "filter": [
                 {
