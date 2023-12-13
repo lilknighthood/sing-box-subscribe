@@ -104,7 +104,7 @@
       "tag":"🇸🇬 SINGAPORE auto",
       "type":"urltest",
       "outbounds":[
-      
+      "direct",
         "{all}"
       ],
       "filter":[
