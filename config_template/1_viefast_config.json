@@ -90,7 +90,7 @@
       "tag":"🇭🇰 HONGKONG auto",
       "type":"urltest",
       "outbounds":[
-      
+      "direct",
         "{all}"
       ],
       "filter":[
