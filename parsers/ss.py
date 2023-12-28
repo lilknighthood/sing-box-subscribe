@@ -19,67 +19,48 @@ def parse(data):
             node['tag'] = remark
         param = param[:param.find('#')]
     if param.find('plugin=obfs-local') > -1 or param.find('plugin=simple-obfs') > -1:
-        plugin_opts={}
         if param.find('&', param.find('plugin')) > -1:
             plugin = urllib.parse.unquote(param[param.find('plugin'):param.find('&', param.find('plugin'))])
         else:
             plugin = urllib.parse.unquote(param[param.find('plugin'):])
         param = param[:param.find('?')]
         node['plugin'] = 'obfs-local'
-        for p in plugin.split(';'):
-            key_value = p.split('=')
-            kname = key_value[0]
-            pdict = {'obfs':'mode','obfs-host':'host'}
-            if kname in pdict.keys():
-                #kname = pdict[kname]
-                plugin_opts[kname] = key_value[1]
-        node['plugin_opts']=re.sub(r"\{|\}|\"|\\|\&|\s+", "", json.dumps(plugin_opts).replace(':','=', 2).replace(',',';').replace('Host','').replace('group',''))
+        items = plugin.split(';')
+        plugin_dict = {item.split('=')[0]: item.split('=')[1] for item in items if '=' in item}
+        result_str = "obfs={};{}".format(
+            plugin_dict.get("obfs", ''),
+            'obfs-host={};'.format(plugin_dict["obfs-host"]) if plugin_dict.get("obfs-host") else ''
+        )
+        node['plugin_opts'] = result_str
     if param.find('v2ray-plugin') > -1:
-        plugin_opts={}
         if param.find('&', param.find('v2ray-plugin')) > -1:
-            plugin = tool.b64Decode(param[param.find('v2ray-plugin')+13:param.find('&', param.find('v2ray-plugin'))]).decode('utf-8')
+            try:
+                plugin = tool.b64Decode(param[param.find('v2ray-plugin')+13:param.find('&', param.find('v2ray-plugin'))]).decode('utf-8')
+            except:
+                plugin = urllib.parse.unquote(param[param.find('v2ray-plugin')+15:param.find('&', param.find('v2ray-plugin'))])
+                pairs = [pair.split('=') for pair in plugin.split(';') if '=' in pair and pair.count('=') == 1]
+                plugin = str({key: value for key, value in pairs})
         else:
-            plugin = tool.b64Decode(param[param.find('v2ray-plugin')+13:]).decode('utf-8')
+            try:
+                plugin = tool.b64Decode(param[param.find('v2ray-plugin')+13:]).decode('utf-8')
+            except:
+                plugin = urllib.parse.unquote(param[param.find('v2ray-plugin')+15:])
+                pairs = [pair.split('=') for pair in plugin.split(';') if '=' in pair and pair.count('=') == 1]
+                plugin = str({key: value for key, value in pairs})
         param = param[:param.find('?')]
         node['plugin'] = 'v2ray-plugin'
         plugin = eval(plugin.replace('true','1'))
-        result_str = "mode={};host={};{}{}{}{}".format(
+        result_str = "mode={};{}{}{}{}{}{}{}".format(
             plugin.get("mode", ''),
-            plugin.get("host", ''),
-            'path={};'.format(plugin["path"]) if "path" in plugin else '',
-            'mux={};'.format(plugin["mux"]) if "mux" in plugin else '',
-            'headers={};'.format(json.dumps(plugin["headers"])) if "headers" in plugin else '',
-            'fingerprint={};'.format(plugin["fingerprint"]) if "fingerprint" in plugin else ''
+            'host={};'.format(plugin["host"]) if plugin.get("host") else '',
+            'path={};'.format(plugin["path"]) if plugin.get("path") else '',
+            'mux={};'.format(plugin["mux"]) if plugin.get("mux") == 1 else '',
+            'headers={};'.format(json.dumps(plugin["headers"])) if plugin.get("headers") else '',
+            'fingerprint={};'.format(plugin["fingerprint"]) if plugin.get("fingerprint") else '',
+            'skip-cert-verify={};'.format('true') if plugin.get("skip-cert-verify") == 1 else '',
+            '{};'.format('tls') if plugin.get("tls") == 1 else '',
         )
         node['plugin_opts'] = result_str
-    param2 = data[5:]
-    if param2.find('shadow-tls') > -1:
-        flag = 1
-        if param.find('&', param.find('shadow-tls')) > -1:
-            plugin = tool.b64Decode(param2[param2.find('shadow-tls')+11:param2.find('&', param2.find('shadow-tls'))].split('#')[0]).decode('utf-8')
-        else:
-            plugin = tool.b64Decode(param2[param2.find('shadow-tls')+11:].split('#')[0]).decode('utf-8')
-        plugin = eval(plugin.replace('true','True'))
-        node['detour'] = node['tag']+'_shadowtls'
-        node_tls = {
-            'tag':node['detour'],
-            'type':'shadowtls',
-            'version':int(plugin.get('version', '1')),
-            'password':plugin.get('password', ''),
-            'tls':{
-                'enabled': True,
-                'server_name': plugin.get('host', '')
-            }
-        }
-        if plugin.get('address'):
-            node_tls['server'] = plugin['address']
-        if plugin.get('port'):
-            node_tls['server_port'] = int(plugin['port'])
-        if plugin.get('fp'):
-            node_tls['tls']['utls']={
-                'enabled': True,
-                'fingerprint': plugin.get('fp')
-            }
     if data[5:].find('protocol') > -1:
         smux = data[5:][data[5:].find('protocol'):]
         smux_dict = parse_qs(smux)
@@ -95,6 +76,7 @@ def parse(data):
             node['multiplex']['min_streams'] = int(smux_dict['min-streams'])
         if smux_dict.get('padding') == 'True':
             node['multiplex']['padding'] = True
+    param = param.split('/')[0]
     if param.find('@') > -1:
         matcher = re.match(r'(.*?)@(.*):(.*)', param)
         if matcher:
@@ -127,6 +109,38 @@ def parse(data):
         else:
             return None
     node['server_port'] = int(re.search(r'\d+', node['server_port']).group())
+    param2 = data[5:]
+    if param2.find('shadow-tls') > -1:
+        flag = 1
+        if param2.find('&', param2.find('shadow-tls')) > -1:
+            plugin = tool.b64Decode(param2[param2.find('shadow-tls')+11:param2.find('&', param2.find('shadow-tls'))].split('#')[0]).decode('utf-8')
+        else:
+            plugin = tool.b64Decode(param2[param2.find('shadow-tls')+11:].split('#')[0]).decode('utf-8')
+        plugin = eval(plugin.replace('true','True'))
+        node['detour'] = node['tag']+'_shadowtls'
+        node_tls = {
+            'tag':node['detour'],
+            'type':'shadowtls',
+            'server':node['server'],
+            'server_port':node['server_port'],
+            'version':int(plugin.get('version', '1')),
+            'password':plugin.get('password', ''),
+            'tls':{
+                'enabled': True,
+                'server_name': plugin.get('host', '')
+            }
+        }
+        if plugin.get('address'):
+            node_tls['server'] = plugin['address']
+        if plugin.get('port'):
+            node_tls['server_port'] = int(plugin['port'])
+        if plugin.get('fp'):
+            node_tls['tls']['utls']={
+                'enabled': True,
+                'fingerprint': plugin.get('fp')
+            }
+        del node['server']
+        del node['server_port']
     if flag:
         return node,node_tls
     else:

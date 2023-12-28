@@ -60,37 +60,42 @@ def clash2v2ray(share_link):
             ss_info["plugin"] = share_link['plugin']
             if share_link.get('plugin') == 'obfs':
                 ss_info["mode"] = share_link['plugin-opts']['mode']
-                ss_info["host"] = share_link['plugin-opts']['host']
+                ss_info["host"] = share_link['plugin-opts'].get('host', '')
                 url_link = '?plugin=obfs-local%3Bobfs%3D{mode}%3Bobfs-host%3D{host}'.format(**ss_info)
             if share_link.get('plugin') == 'v2ray-plugin':
                 ss_info["obfs"] = share_link['plugin-opts']['mode']
                 ss_info["obfs-host"] = share_link['plugin-opts'].get('host','')
-                if share_link['plugin-opts'].get('fingerprint'):
-                    ss_info["fingerprint"] = share_link['plugin-opts']['fingerprint']
                 if share_link['plugin-opts'].get('path'):
                     ss_info["path"] = share_link['plugin-opts']['path']
                 if share_link['plugin-opts'].get('headers'):
                     ss_info["headers"] = share_link['plugin-opts']['headers']
+                if share_link['plugin-opts'].get('fingerprint'):
+                    ss_info["fingerprint"] = share_link['plugin-opts']['fingerprint']
                 if share_link['plugin-opts'].get('mux') == True:
                     ss_info["mux"] = True
-                #if share_link['plugin-opts'].get('tls') == True:
-                #    ss_info["tls"] = True
+                if share_link['plugin-opts'].get('skip-cert-verify') == True:
+                    ss_info["skip-cert-verify"] = True
+                if share_link['plugin-opts'].get('tls') == True:
+                    ss_info["tls"] = True
                 v2ray_plugin = {
+                    "mode": ss_info.get("obfs", ""),
+                    "host": ss_info.get("obfs-host", ""),
                     "path": ss_info.get("path", ""),
-                    "mux": ss_info.get("mux", False),
                     "headers": ss_info.get("headers", ""),
                     "fingerprint": ss_info.get("fingerprint", ""),
-                    "mode": ss_info.get("obfs", ""),
-                    "host": ss_info.get("obfs-host", "")
+                    "mux": ss_info.get("mux", False),
+                    "skip-cert-verify": ss_info.get("skip-cert-verify", ''),
+                    "tls": ss_info.get("tls", ''),
                 }
                 v2ray_plugin = json.dumps(v2ray_plugin)
                 url_link = f'?v2ray-plugin={base64.b64encode(v2ray_plugin.encode()).decode()}'
             if share_link.get('plugin') == 'shadow-tls':
+                ss_info["fingerprint"] = share_link.get("client-fingerprint", "")
                 ss_info["shadowtls_password"] = share_link['plugin-opts']['password']
                 ss_info["version"] = share_link['plugin-opts']['version']
                 ss_info["host"] = share_link['plugin-opts']['host']
-                shadowtls = f'{{"version": "{ss_info["version"]}", "host": "{ss_info["host"]}","password": "{ss_info["shadowtls_password"]}"}}'
-                url_link += f'?shadow-tls={base64.b64encode(shadowtls.encode()).decode()}'
+                shadowtls = f'{{"version": "{ss_info["version"]}", "host": "{ss_info["host"]}","password": "{ss_info["shadowtls_password"]}","fp": "{ss_info["fingerprint"]}"}}'
+                url_link = f'?shadow-tls={base64.b64encode(shadowtls.encode()).decode()}'
             link = "ss://{base_link}@{server}:{port}{url_link}".format(base_link=base_link, url_link=url_link, **ss_info)
         else:
             link = "ss://{base_link}@{server}:{port}".format(base_link=base_link, **ss_info)

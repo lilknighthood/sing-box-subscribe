@@ -30,8 +30,7 @@ def parse(data):
         }
         if netquery.get('allowInsecure') == '0':
             node['tls']['insecure'] = False
-        if netquery.get('sni', '') not in ['None', '']:
-            node['tls']['server_name'] = netquery['sni']
+        node['tls']['server_name'] = netquery.get('sni', '') or netquery.get('peer', '')
         if netquery.get('fp'):
             node['tls']['utls'] = {
                 'enabled': True,
@@ -46,7 +45,7 @@ def parse(data):
                 node['tls']['reality']['short_id'] = netquery['sid']
             node['tls']['utls'] = {
                 'enabled': True,
-                'fingerprint': netquery.get('fp', 'chrome')
+                'fingerprint': 'chrome'
             }
     if netquery.get('type'):
         if netquery['type'] == 'http':
@@ -65,7 +64,7 @@ def parse(data):
                 if node['tls']['server_name'] == '':
                     if node['transport']['headers']['Host']:
                         node['tls']['server_name'] = node['transport']['headers']['Host']
-            if '?ed=' in netquery.get('path'):
+            if '?ed=' in netquery.get('path', ''):
                 node['transport']['early_data_header_name'] = 'Sec-WebSocket-Protocol'
                 node['transport']['max_early_data'] = int(re.search(r'\d+', netquery.get('path').rsplit("?ed=")[1]).group())
         if netquery['type'] == 'grpc':
